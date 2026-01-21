@@ -16,6 +16,6 @@ public class Bluga {
                 + lines
                 + "What can I do for you?\n"
                 + lines
-                + "Bye bye!");
+                + "Bye! Hope to see you soon!\n");
     }
 }
