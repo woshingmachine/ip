@@ -1,7 +1,66 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+------------------------------
+What's up twin, I'm
+TWINBOT
+------------------------------
+What can I do for you twin?
+------------------------------
+
+------------------------------
+Added: Buy Milk
+
+You now have 1 tasks in your list, twin
+------------------------------
+
+------------------------------
+Added: Homework by Monday
+
+You now have 2 tasks in your list, twin
+------------------------------
+
+------------------------------
+Here are your tasks, twin:
+
+1. [ ][ToDo] Buy Milk
+2. [ ][Deadline] Homework | By: Monday
+------------------------------
+
+------------------------------
+Nice, twin! I've marked the item.
+
+1. [X][ToDo] Buy Milk
+2. [ ][Deadline] Homework | By: Monday
+------------------------------
+
+------------------------------
+Nice, twin! I've unmarked the item.
+
+1. [ ][ToDo] Buy Milk
+2. [ ][Deadline] Homework | By: Monday
+------------------------------
+
+------------------------------
+Added: Project from today to tomorrow
+
+You now have 3 tasks in your list, twin
+------------------------------
+
+Twin, use 'todo task'
+
+------------------------------
+Added: finish work
+
+You now have 4 tasks in your list, twin
+------------------------------
+
+Twin, use 'event task /from start /to end.'
+
+------------------------------
+Added: jump from 1 to 5
+
+You now have 5 tasks in your list, twin
+------------------------------
+
+------------------------------
+See you soon twin.
+------------------------------
 

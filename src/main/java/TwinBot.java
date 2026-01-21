@@ -5,14 +5,8 @@ public class TwinBot {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
-        int listCounter = 0;
 
-        String name =
-                "                                            \n" +
-                "██████ ▄▄   ▄▄ ▄▄ ▄▄  ▄▄ █████▄  ▄▄▄ ▄▄▄▄▄▄ \n" +
-                "  ██   ██ ▄ ██ ██ ███▄██ ██▄▄██ ██▀██  ██   \n" +
-                "  ██    ▀█▀█▀  ██ ██ ▀██ ██▄▄█▀ ▀███▀  ██   \n" +
-                "                                            \n";
+        String name = "TWINBOT\n";
         String lines = "------------------------------\n";
 
         System.out.println(
@@ -25,8 +19,8 @@ public class TwinBot {
 
         while (true) {
             String input = scanner.nextLine();
-            String[] parts = input.toLowerCase().split(" ", 2);
-            String command = parts[0];
+            String[] parts = input.split(" ", 2);
+            String command = parts[0].toLowerCase();
 
             switch (command) {
                 case "bye":
@@ -50,9 +44,8 @@ public class TwinBot {
 
                         ToDo toDo = new ToDo(toDoDescription);
                         list.add(toDo);
-                        listCounter += 1;
 
-                        System.out.println(lines + "Added: " + toDo.getDescription() + "\n" + listCount(listCounter) + lines);
+                        System.out.println(lines + "Added: " + toDo.getDescription() + "\n" + listCount(list.size()) + lines);
                     } catch (Exception e) {
                         System.out.println("Twin, use 'todo task'\n");
                     }
@@ -68,7 +61,6 @@ public class TwinBot {
 
                         Deadline deadline = new Deadline(deadlineDescription, deadlineDate);
                         list.add(deadline);
-                        listCounter += 1;
 
                         System.out.println(
                                 lines
@@ -77,7 +69,7 @@ public class TwinBot {
                                 + " by "
                                 + deadlineDate
                                 + "\n"
-                                + listCount(listCounter)
+                                + listCount(list.size())
                                 + lines
                         );
                     } catch (Exception e) {
@@ -96,13 +88,12 @@ public class TwinBot {
 
                         Event event = new Event(eventDescription, start, end);
                         list.add(event);
-                        listCounter += 1;
 
                         System.out.println(
                                 lines
                                 + "Added: "
                                 + eventDescription
-                                + " from " + start + " to " + end + "\n" + listCount(listCounter) + lines
+                                + " from " + start + " to " + end + "\n" + listCount(list.size()) + lines
                         );
                     } catch (Exception e) {
                         System.out.println("Twin, use 'event task /from start /to end.'\n");
@@ -110,8 +101,7 @@ public class TwinBot {
                     break;
                 default:
                     list.add(new Task(input));
-                    listCounter += 1;
-                    System.out.println(lines + "Added: " + input + "\n" + listCount(listCounter) + lines);
+                    System.out.println(lines + "Added: " + input + "\n" + listCount(list.size()) + lines);
             }
         }
     }
@@ -145,8 +135,7 @@ public class TwinBot {
         for (int i = 0; i < list.size(); i++) {
             System.out.println(i + 1
                     + ". "
-                    + list.get(i).toString()
-                    + "\n");
+                    + list.get(i).toString());
         }
     }
 
