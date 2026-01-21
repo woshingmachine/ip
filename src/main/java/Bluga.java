@@ -1,5 +1,8 @@
+import java.util.Scanner;
+
 public class Bluga {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         String name = "______ _                   \n" +
                 "| ___ \\ |                  \n" +
                 "| |_/ / |_   _  __ _  __ _ \n" +
@@ -15,7 +18,16 @@ public class Bluga {
                 + name
                 + lines
                 + "What can I do for you?\n"
-                + lines
-                + "Bye! Hope to see you soon!\n");
+                + lines);
+
+        while (true) {
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("bye")) {
+                System.out.println(lines + "    Bye!\n" + lines);
+                break;
+            } else {
+                System.out.println(lines + "    " + input + "\n" + lines);
+            }
+        }
     }
 }
