@@ -8,4 +8,6 @@ TODO
 todo finish work
 event      /from /to
 event jump /from 1 /to 5
+blah
+help
 Bye

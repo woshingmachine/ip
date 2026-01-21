@@ -60,6 +60,15 @@ Added: jump from 1 to 5
 You now have 5 tasks in your list, twin
 ------------------------------
 
+Twin, icl idk what that means. Type help for list of commands.
+- todo <task>
+- deadline <task> /by <date>
+- event <task> /from <start> to <end>
+- bye
+- list
+- mark <number>
+- unmark <number>
+
 ------------------------------
 See you soon twin.
 ------------------------------

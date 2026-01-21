@@ -99,9 +99,18 @@ public class TwinBot {
                         System.out.println("Twin, use 'event task /from start /to end.'\n");
                     }
                     break;
+                // user inputs help
+                case "help":
+                    System.out.println(
+                            "- todo <task>\n" +
+                            "- deadline <task> /by <date>\n" +
+                            "- event <task> /from <start> to <end>\n" +
+                            "- bye\n- list\n- mark <number>\n- unmark <number>\n"
+                    );
+                    break;
+                // Any other input is considered invalid
                 default:
-                    list.add(new Task(input));
-                    System.out.println(lines + "Added: " + input + "\n" + listCount(list.size()) + lines);
+                    System.out.println("Twin, icl idk what that means. Type help for list of commands.");
             }
         }
     }
