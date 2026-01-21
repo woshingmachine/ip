@@ -69,6 +69,14 @@ Twin, icl idk what that means. Type help for list of commands.
 - mark <number>
 - unmark <number>
 
+Twin, use 'delete number'.
+
+------------------------------
+Ok twin, I've removed this task: [ ][ToDo] Buy Milk
+
+You now have 4 tasks in your list, twin
+------------------------------
+
 ------------------------------
 See you soon twin.
 ------------------------------

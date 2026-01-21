@@ -99,6 +99,19 @@ public class TwinBot {
                         System.out.println("Twin, use 'event task /from start /to end.'\n");
                     }
                     break;
+                case "delete":
+                    try {
+                        int index = Integer.parseInt(parts[1]);
+                        Task task = list.get(index - 1);
+                        list.remove(index - 1);
+                        System.out.println(
+                                lines + "Ok twin, I've removed this task: "
+                                + task + "\n" + listCount(list.size()) + lines
+                        );
+                    } catch (Exception e) {
+                        System.out.println("Twin, use 'delete number'.\n");
+                    }
+                    break;
                 // user inputs help
                 case "help":
                     System.out.println(
