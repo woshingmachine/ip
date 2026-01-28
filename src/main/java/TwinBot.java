@@ -23,107 +23,108 @@ public class TwinBot {
             String command = parts[0].toLowerCase();
 
             switch (command) {
-                case "bye":
-                    System.out.println(lines + "See you soon twin.\n" + lines);
-                    return;
-                case "list":
-                    System.out.println(lines + "Here are your tasks, twin:\n");
-                    printList(list);
-                    System.out.println(lines);
-                    break;
-                case "mark":
-                case "unmark":
-                    handleMarkUnmark(command, parts, list, lines);
-                    break;
-                case "todo":
-                    try {
-                        String toDoDescription = parts[1].trim();
+            case "bye":
+                System.out.println(lines + "See you soon twin.\n" + lines);
+                return;
+            case "list":
+                System.out.println(lines + "Here are your tasks, twin:\n");
+                printList(list);
+                System.out.println(lines);
+                break;
+            case "mark":
+            case "unmark":
+                handleMarkUnmark(command, parts, list, lines);
+                break;
+            case "todo":
+                try {
+                    String toDoDescription = parts[1].trim();
+                    // Check if description is empty
+                    if (toDoDescription.isEmpty()) throw new Exception();
+                    ToDo toDo = new ToDo(toDoDescription);
+                    list.add(toDo);
+                    System.out.println(lines + "Added: " + toDo.getDescription() + "\n" + listCount(list.size()) + lines);
+                } catch (Exception e) {
+                    System.out.println("Twin, use 'todo task'\n");
+                }
+                break;
+            case "deadline":
+                try {
+                    String[] deadlineParts = parts[1].split("/by", 2);
+                    String deadlineDescription = deadlineParts[0].trim();
+                    String deadlineDate = deadlineParts[1].trim();
 
-                        // Check if description is empty
-                        if (toDoDescription.isEmpty()) throw new Exception();
+                    // Check if any of the args are empty
+                    if (deadlineDescription.isEmpty() || deadlineDate.isEmpty()) throw new Exception();
 
-                        ToDo toDo = new ToDo(toDoDescription);
-                        list.add(toDo);
+                    Deadline deadline = new Deadline(deadlineDescription, deadlineDate);
+                    list.add(deadline);
 
-                        System.out.println(lines + "Added: " + toDo.getDescription() + "\n" + listCount(list.size()) + lines);
-                    } catch (Exception e) {
-                        System.out.println("Twin, use 'todo task'\n");
-                    }
-                    break;
-                case "deadline":
-                    try {
-                        String[] deadlineParts = parts[1].split("/by", 2);
-                        String deadlineDescription = deadlineParts[0].trim();
-                        String deadlineDate = deadlineParts[1].trim();
-
-                        // Check if any of the args are empty
-                        if (deadlineDescription.isEmpty() || deadlineDate.isEmpty()) throw new Exception();
-
-                        Deadline deadline = new Deadline(deadlineDescription, deadlineDate);
-                        list.add(deadline);
-
-                        System.out.println(
-                                lines
-                                + "Added: "
-                                + deadlineDescription
-                                + " by "
-                                + deadlineDate
-                                + "\n"
-                                + listCount(list.size())
-                                + lines
-                        );
-                    } catch (Exception e) {
-                        System.out.println("Twin, use 'deadline task /by date'\n");
-                    }
-                    break;
-                case "event":
-                    try {
-                        String[] eventParts = parts[1].split("/from|/to", 3);
-                        String eventDescription = eventParts[0].trim();
-                        String start = eventParts[1].trim();
-                        String end = eventParts[2].trim();
-
-                        // Check if any of the args are empty
-                        if (eventDescription.isEmpty() || start.isEmpty() || end.isEmpty()) throw new Exception();
-
-                        Event event = new Event(eventDescription, start, end);
-                        list.add(event);
-
-                        System.out.println(
-                                lines
-                                + "Added: "
-                                + eventDescription
-                                + " from " + start + " to " + end + "\n" + listCount(list.size()) + lines
-                        );
-                    } catch (Exception e) {
-                        System.out.println("Twin, use 'event task /from start /to end.'\n");
-                    }
-                    break;
-                case "delete":
-                    try {
-                        int index = Integer.parseInt(parts[1]);
-                        Task task = list.get(index - 1);
-                        list.remove(index - 1);
-                        System.out.println(
-                                lines + "Ok twin, I've removed this task: "
-                                + task + "\n" + listCount(list.size()) + lines
-                        );
-                    } catch (Exception e) {
-                        System.out.println("Twin, use 'delete number'.\n");
-                    }
-                    break;
-                // user inputs help
-                case "help":
-                    System.out.println(
-                            "- todo <task>\n" +
-                            "- deadline <task> /by <date>\n" +
-                            "- event <task> /from <start> to <end>\n" +
-                            "- bye\n- list\n- mark <number>\n- unmark <number>\n"
+                    System.out.println(lines
+                            + "Added: "
+                            + deadlineDescription
+                            + " by "
+                            + deadlineDate
+                            + "\n"
+                            + listCount(list.size())
+                            + lines
                     );
-                    break;
-                // Any other input is considered invalid
-                default:
-                    System.out.println("Twin, icl idk what that means. Type help for list of commands.");
+                } catch (Exception e) {
+                    System.out.println("Twin, use 'deadline task /by date'\n");
+                }
+                break;
+            case "event":
+                try {
+                    String[] eventParts = parts[1].split("/from|/to", 3);
+                    String eventDescription = eventParts[0].trim();
+                    String start = eventParts[1].trim();
+                    String end = eventParts[2].trim();
+
+                    // Check if any of the args are empty
+                    if (eventDescription.isEmpty() || start.isEmpty() || end.isEmpty()) throw new Exception();
+
+                    Event event = new Event(eventDescription, start, end);
+                    list.add(event);
+
+                    System.out.println(lines
+                            + "Added: "
+                            + eventDescription
+                            + " from "
+                            + start
+                            + " to "
+                            + end
+                            + "\n"
+                            + listCount(list.size())
+                            + lines
+                    );
+                } catch (Exception e) {
+                    System.out.println("Twin, use 'event task /from start /to end.'\n");
+                }
+                break;
+            case "delete":
+                try {
+                    int index = Integer.parseInt(parts[1]);
+                    Task task = list.get(index - 1);
+                    list.remove(index - 1);
+                    System.out.println(
+                            lines + "Ok twin, I've removed this task: "
+                            + task + "\n" + listCount(list.size()) + lines
+                    );
+                } catch (Exception e) {
+                    System.out.println("Twin, use 'delete number'.\n");
+                }
+                break;
+            // user inputs help
+            case "help":
+                System.out.println(
+                        "- todo <task>\n" +
+                        "- deadline <task> /by <date>\n" +
+                        "- event <task> /from <start> to <end>\n" +
+                        "- bye\n- list\n- mark <number>\n- unmark <number>\n"
+                );
+                break;
+            // Any other input is considered invalid
+            default:
+                System.out.println("Twin, icl idk what that means. Type help for list of commands.");
             }
         }
     }
