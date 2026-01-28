@@ -68,6 +68,7 @@ Twin, icl idk what that means. Type help for list of commands.
 - list
 - mark <number>
 - unmark <number>
+- delete <number>
 
 Twin, use 'delete number'.
 
