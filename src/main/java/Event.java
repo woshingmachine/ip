@@ -1,39 +1,73 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents an event task with a start and end time.
  * Extends Task with additional start and end time fields.
  */
 public class Event extends Task {
-    private String start;
-    private String end;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
     /**
      * Constructs an Event task with the given description, start time, and end time.
      *
      * @param description the task description
-     * @param start the start time of the event
-     * @param end the end time of the event
+     * @param startString the start time of the event as a string
+     * @param endString the end time of the event as a string
      */
-    public Event(String description, String start, String end) {
+    public Event(String description, String startString, String endString) {
         super(description, TaskType.EVENT);
-        this.start = start;
-        this.end = end;
+        this.start = parseDateTime(startString);
+        this.end = parseDateTime(endString);
+    }
+
+    /**
+     * Parses a date/time string in multiple formats.
+     * Supported formats:
+     * - yyyy-MM-dd HH:mm (e.g., 2019-12-02 18:00)
+     * - d/M/yyyy HHmm (e.g., 2/12/2019 1800)
+     * - d/M/yyyy (e.g., 2/12/2019) - defaults to 00:00
+     *
+     * @param dateString the date string to parse
+     * @return parsed LocalDateTime, or null if parsing fails
+     */
+    private LocalDateTime parseDateTime(String dateString) {
+        String trimmed = dateString.trim();
+        DateTimeFormatter[] formatters = {
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
+            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),
+            DateTimeFormatter.ofPattern("d/M/yyyy")
+        };
+
+        for (DateTimeFormatter formatter : formatters) {
+            try {
+                return LocalDateTime.parse(trimmed, formatter);
+            } catch (DateTimeParseException e) {
+                // Try next format
+            }
+        }
+
+        System.out.println("Invalid date/time format! Use yyyy-MM-dd HH:mm or d/M/yyyy HHmm, twin.");
+        return null;
     }
 
     /**
      * Returns the start time of the event.
      *
-     * @return the start time as a String
+     * @return the start time as LocalDateTime
      */
-    public String getStart() {
+    public LocalDateTime getStart() {
         return this.start;
     }
 
     /**
      * Returns the end time of the event.
      *
-     * @return the end time as a String
+     * @return the end time as LocalDateTime
      */
-    public String getEnd() {
+    public LocalDateTime getEnd() {
         return this.end;
     }
 
@@ -50,16 +84,20 @@ public class Event extends Task {
     /**
      * Returns a string representation of the event task for display.
      *
-     * @return formatted String containing status, type, description, start date, and end date
+     * @return formatted String containing status, type, description, start date/time, and end date/time
      */
     @Override
     public String toString() {
+        if (this.start == null || this.end == null) {
+            return this.getStatusIcon() + "[E] " + this.getDescription() + " | (invalid dates)";
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return this.getStatusIcon()
-                + "[Event] "
+                + "[E] "
                 + this.getDescription()
-                + " | Start date: "
-                + this.getStart()
-                + " | End date: "
-                + this.getEnd();
+                + " | from: "
+                + this.start.format(formatter)
+                + " to: "
+                + this.end.format(formatter);
     }
 }
