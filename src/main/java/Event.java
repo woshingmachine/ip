@@ -49,7 +49,10 @@ public class Event extends Task {
             }
         }
 
-        System.out.println("Invalid date/time format! Use yyyy-MM-dd HH:mm or d/M/yyyy HHmm, twin.");
+        System.out.println("Invalid date/time format! Supported formats:");
+        System.out.println("  - yyyy-MM-dd HH:mm (e.g., 2019-12-02 18:00)");
+        System.out.println("  - d/M/yyyy HHmm (e.g., 2/12/2019 1800)");
+        System.out.println("  - d/M/yyyy (e.g., 2/12/2019)");
         return null;
     }
 
