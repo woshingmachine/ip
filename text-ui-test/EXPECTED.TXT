@@ -1,35 +1,46 @@
 ------------------------------
-What's up twin, I'm
+
+What's up twin, I'm 
 TWINBOT
-------------------------------
+
 What can I do for you twin?
+
 ------------------------------
 
 ------------------------------
+
 Added: Buy Milk
 
 You now have 1 tasks in your list, twin
+
 ------------------------------
 
 ------------------------------
+
 Added: Homework by 2/12/2019 1800
 
 You now have 2 tasks in your list, twin
+
 ------------------------------
 
 ------------------------------
+
 Added: Return book by 2019-12-15 14:30
 
 You now have 3 tasks in your list, twin
+
 ------------------------------
 
 ------------------------------
+
 Added: Project from 2/1/2020 0900 to 3/1/2020 1700
 
 You now have 4 tasks in your list, twin
+
 ------------------------------
 
 ------------------------------
+
 Here are your tasks, twin:
 
 1. [ ][T] Buy Milk
@@ -39,6 +50,7 @@ Here are your tasks, twin:
 ------------------------------
 
 ------------------------------
+
 Nice, twin! I've marked the item.
 
 1. [X][T] Buy Milk
@@ -48,6 +60,7 @@ Nice, twin! I've marked the item.
 ------------------------------
 
 ------------------------------
+
 Nice, twin! I've unmarked the item.
 
 1. [ ][T] Buy Milk
@@ -57,12 +70,15 @@ Nice, twin! I've unmarked the item.
 ------------------------------
 
 ------------------------------
+
 Added: Meeting from 2019-12-02 10:00 to 2019-12-02 11:00
 
 You now have 5 tasks in your list, twin
+
 ------------------------------
 
 ------------------------------
+
 Here are your tasks, twin:
 
 1. [ ][T] Buy Milk
@@ -73,12 +89,15 @@ Here are your tasks, twin:
 ------------------------------
 
 ------------------------------
+
 Ok twin, I've removed this task: [ ][D] Homework | By: Dec 02 2019 18:00
 
 You now have 4 tasks in your list, twin
+
 ------------------------------
 
 ------------------------------
+
 Here are your tasks, twin:
 
 1. [ ][T] Buy Milk
@@ -97,6 +116,7 @@ Here are your tasks, twin:
 - delete <number>
 
 ------------------------------
-See you soon twin.
-------------------------------
 
+Bye. Hope to see you again soon, twin!
+
+------------------------------
