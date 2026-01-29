@@ -11,7 +11,8 @@ import twinbot.ui.Ui;
 
 /**
  * TwinBot is a task management chatbot application.
- * It allows users to create, manage, and track tasks including to-dos, deadlines, and events.
+ * It allows users to create, manage, and track tasks including to-dos,
+ * deadlines, and events.
  */
 public class TwinBot {
     private Ui ui;
@@ -20,7 +21,7 @@ public class TwinBot {
 
     /**
      * Constructor for TwinBot.
-     * 
+     *
      * @param filePath the path to the data file for storing tasks
      */
     public TwinBot(String filePath) {
