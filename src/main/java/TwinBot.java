@@ -22,8 +22,9 @@ public class TwinBot {
 
         while (true) {
             String input = ui.readCommand();
-            String[] parts = input.split(" ", 2);
-            String command = parts[0].toLowerCase();
+            ParsedCommand parsed = Parser.parse(input);
+            String command = parsed.getCommand();
+            String arguments = parsed.getArguments();
 
             switch (command) {
             case "bye":
@@ -40,91 +41,20 @@ public class TwinBot {
                 break;
             case "mark":
             case "unmark":
-                handleMarkUnmark(command, parts, list, storage, ui);
+                handleMarkUnmark(command, arguments, list, storage, ui);
                 break;
             case "todo":
-                try {
-                    String toDoDescription = parts[1].trim();
-                    // Check if description is empty
-                    if (toDoDescription.isEmpty()) throw new Exception();
-                    ToDo toDo = new ToDo(toDoDescription);
-                    list.add(toDo);
-                    saveList(list, storage, ui);
-                    ui.showLine();
-                    ui.showMessage("Added: " + toDo.getDescription() + "\n" + listCount(list.size()));
-                    ui.showLine();
-                } catch (Exception e) {
-                    ui.showError("Twin, use 'todo task'\n");
-                }
+                handleTodo(arguments, list, storage, ui);
                 break;
             case "deadline":
-                try {
-                    String[] deadlineParts = parts[1].split("/by", 2);
-                    String deadlineDescription = deadlineParts[0].trim();
-                    String deadlineDate = deadlineParts[1].trim();
-
-                    // Check if any of the args are empty
-                    if (deadlineDescription.isEmpty() || deadlineDate.isEmpty()) throw new Exception();
-
-                    Deadline deadline = new Deadline(deadlineDescription, deadlineDate);
-                    list.add(deadline);
-                    saveList(list, storage, ui);
-
-                    ui.showLine();
-                    ui.showMessage("Added: "
-                            + deadlineDescription
-                            + " by "
-                            + deadlineDate
-                            + "\n"
-                            + listCount(list.size()));
-                    ui.showLine();
-                } catch (Exception e) {
-                    ui.showError("Twin, use 'deadline task /by date'\n");
-                }
+                handleDeadline(arguments, list, storage, ui);
                 break;
             case "event":
-                try {
-                    String[] eventParts = parts[1].split("/from|/to", 3);
-                    String eventDescription = eventParts[0].trim();
-                    String start = eventParts[1].trim();
-                    String end = eventParts[2].trim();
-
-                    // Check if any of the args are empty
-                    if (eventDescription.isEmpty() || start.isEmpty() || end.isEmpty()) throw new Exception();
-
-                    Event event = new Event(eventDescription, start, end);
-                    list.add(event);
-                    saveList(list, storage, ui);
-
-                    ui.showLine();
-                    ui.showMessage("Added: "
-                            + eventDescription
-                            + " from "
-                            + start
-                            + " to "
-                            + end
-                            + "\n"
-                            + listCount(list.size()));
-                    ui.showLine();
-                } catch (Exception e) {
-                    ui.showError("Twin, use 'event task /from start /to end.'\n");
-                }
+                handleEvent(arguments, list, storage, ui);
                 break;
             case "delete":
-                try {
-                    int index = Integer.parseInt(parts[1]);
-                    Task task = list.get(index - 1);
-                    list.remove(index - 1);
-                    saveList(list, storage, ui);
-                    ui.showLine();
-                    ui.showMessage("Ok twin, I've removed this task: "
-                            + task + "\n" + listCount(list.size()));
-                    ui.showLine();
-                } catch (Exception e) {
-                    ui.showError("Twin, use 'delete number'.\n");
-                }
+                handleDelete(arguments, list, storage, ui);
                 break;
-            // user inputs help
             case "help":
                 ui.showMessage(
                         "- todo <task>\n" +
@@ -134,47 +64,107 @@ public class TwinBot {
                         "- delete <number>\n"
                 );
                 break;
-            // Any other input is considered invalid
             default:
                 ui.showError("Twin, icl idk what that means. Type help for list of commands.");
             }
         }
     }
 
-    /**
-     * Handles marking and unmarking tasks as done or not done.
-     *
-     * @param command the command ("mark" or "unmark")
-     * @param parts the parsed user input
-     * @param list the list of tasks
-     * @param storage the Storage object to save changes
-     * @param ui the Ui object for user interaction
-     */
-    public static void handleMarkUnmark(
+    private static void handleTodo(String arguments, ArrayList<Task> list, Storage storage, Ui ui) {
+        try {
+            String description = arguments.trim();
+            if (description.isEmpty()) {
+                throw new TwinBotException("Twin, use 'todo task'\n");
+            }
+            ToDo toDo = new ToDo(description);
+            list.add(toDo);
+            saveList(list, storage, ui);
+            ui.showLine();
+            ui.showMessage("Added: " + toDo.getDescription() + "\n" + listCount(list.size()));
+            ui.showLine();
+        } catch (TwinBotException e) {
+            ui.showError(e.getMessage());
+        }
+    }
+
+    private static void handleDeadline(String arguments, ArrayList<Task> list, Storage storage, Ui ui) {
+        try {
+            String[] parts = Parser.parseDeadline(arguments);
+            String description = parts[0];
+            String deadline = parts[1];
+            
+            Deadline deadlineTask = new Deadline(description, deadline);
+            list.add(deadlineTask);
+            saveList(list, storage, ui);
+            
+            ui.showLine();
+            ui.showMessage("Added: " + description + " by " + deadline + "\n" + listCount(list.size()));
+            ui.showLine();
+        } catch (TwinBotException e) {
+            ui.showError(e.getMessage());
+        }
+    }
+
+    private static void handleEvent(String arguments, ArrayList<Task> list, Storage storage, Ui ui) {
+        try {
+            String[] parts = Parser.parseEvent(arguments);
+            String description = parts[0];
+            String start = parts[1];
+            String end = parts[2];
+            
+            Event event = new Event(description, start, end);
+            list.add(event);
+            saveList(list, storage, ui);
+            
+            ui.showLine();
+            ui.showMessage("Added: " + description + " from " + start + " to " + end + "\n" + listCount(list.size()));
+            ui.showLine();
+        } catch (TwinBotException e) {
+            ui.showError(e.getMessage());
+        }
+    }
+
+    private static void handleDelete(String arguments, ArrayList<Task> list, Storage storage, Ui ui) {
+        try {
+            int index = Parser.parseTaskIndex(arguments);
+            if (index >= list.size()) {
+                throw new TwinBotException("Invalid Number.\n");
+            }
+            Task task = list.get(index);
+            list.remove(index);
+            saveList(list, storage, ui);
+            ui.showLine();
+            ui.showMessage("Ok twin, I've removed this task: " + task + "\n" + listCount(list.size()));
+            ui.showLine();
+        } catch (TwinBotException e) {
+            ui.showError(e.getMessage());
+        }
+    }
+
+    private static void handleMarkUnmark(
             String command,
-            String[] parts,
+            String arguments,
             ArrayList<Task> list,
             Storage storage,
             Ui ui
     ) {
-        boolean isMark = parts[0].equalsIgnoreCase("mark");
-            try {
-                int index = Integer.parseInt(parts[1]) - 1; // -1 because of 1 indexing
-                if (index >= 0 && index < list.size()) {
-                    if (isMark) {
-                        list.get(index).mark();
-                    } else {
-                        list.get(index).unmark();
-                    }
-                    String action = isMark ? "marked" : "unmarked";
-                    printListWithHeader("Nice, twin! I've " + action + " the item.\n", list, ui);
-                    saveList(list, storage, ui);
-                } else {
-                    ui.showError("Invalid Number.\n");
-                }
-            } catch (Exception e) {
-                    ui.showError("Please enter a valid number after mark.\n");
+        boolean isMark = command.equalsIgnoreCase("mark");
+        try {
+            int index = Parser.parseTaskIndex(arguments);
+            if (index >= list.size()) {
+                throw new TwinBotException("Invalid Number.\n");
             }
+            if (isMark) {
+                list.get(index).mark();
+            } else {
+                list.get(index).unmark();
+            }
+            String action = isMark ? "marked" : "unmarked";
+            printListWithHeader("Nice, twin! I've " + action + " the item.\n", list, ui);
+            saveList(list, storage, ui);
+        } catch (TwinBotException e) {
+            ui.showError(e.getMessage());
+        }
     }
 
     /**
