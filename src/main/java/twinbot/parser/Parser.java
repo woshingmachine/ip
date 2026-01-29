@@ -1,13 +1,23 @@
 package twinbot.parser;
 
-import twinbot.command.*;
+import twinbot.command.AddDeadlineCommand;
+import twinbot.command.AddEventCommand;
+import twinbot.command.AddTodoCommand;
+import twinbot.command.Command;
+import twinbot.command.DeleteCommand;
+import twinbot.command.ExitCommand;
+import twinbot.command.HelpCommand;
+import twinbot.command.InvalidCommand;
+import twinbot.command.ListCommand;
+import twinbot.command.MarkCommand;
+import twinbot.command.UnmarkCommand;
 import twinbot.exception.TwinBotException;
 
 /**
  * Parses user input into commands.
  */
 public class Parser {
-    
+
     /**
      * Parses the user's full command string into a Command object.
      *
@@ -19,7 +29,7 @@ public class Parser {
         String[] parts = fullCommand.split(" ", 2);
         String command = parts[0].toLowerCase();
         String arguments = parts.length > 1 ? parts[1] : "";
-        
+
         switch (command) {
         case "bye":
             return new ExitCommand();
@@ -43,7 +53,7 @@ public class Parser {
             return new InvalidCommand();
         }
     }
-    
+
     /**
      * Parses a deadline command to extract description and deadline.
      *
@@ -54,21 +64,21 @@ public class Parser {
     public static String[] parseDeadline(String arguments) throws TwinBotException {
         String[] parts = arguments.split("/by", 2);
         if (parts.length < 2) {
-            throw new TwinBotException("Twin, use 'deadline task /by date'\n" +
-                    "Valid date formats: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
+            throw new TwinBotException("Twin, use 'deadline task /by date'\n"
+                    + "Valid date formats: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
         }
-        
+
         String description = parts[0].trim();
         String deadline = parts[1].trim();
-        
+
         if (description.isEmpty() || deadline.isEmpty()) {
-            throw new TwinBotException("Twin, use 'deadline task /by date'\n" +
-                    "Valid date formats: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
+            throw new TwinBotException("Twin, use 'deadline task /by date'\n"
+                    + "Valid date formats: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
         }
-        
-        return new String[]{description, deadline};
+
+        return new String[] { description, deadline };
     }
-    
+
     /**
      * Parses an event command to extract description, start, and end times.
      *
@@ -81,18 +91,18 @@ public class Parser {
         if (parts.length < 3) {
             throw new TwinBotException("Twin, use 'event task /from start /to end.'");
         }
-        
+
         String description = parts[0].trim();
         String start = parts[1].trim();
         String end = parts[2].trim();
-        
+
         if (description.isEmpty() || start.isEmpty() || end.isEmpty()) {
             throw new TwinBotException("Twin, use 'event task /from start /to end.'");
         }
-        
-        return new String[]{description, start, end};
+
+        return new String[] { description, start, end };
     }
-    
+
     /**
      * Parses a task index from a string.
      *
