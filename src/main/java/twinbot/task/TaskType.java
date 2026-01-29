@@ -25,7 +25,7 @@ public enum TaskType {
 
     /**
      * Returns the code used for file storage (T, D or E).
-     * 
+     *
      * @return the code used for file storage
      */
     public String getCode() {
