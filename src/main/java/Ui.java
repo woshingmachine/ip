@@ -5,8 +5,8 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner scanner;
-    private static final String NAME = "TWINBOT\n";
-    private static final String LINE = "------------------------------\n";
+    private static final String NAME = "TWINBOT";
+    private static final String LINE = "------------------------------";
                 
     public Ui() {
         this.scanner = new Scanner(System.in);
@@ -17,8 +17,9 @@ public class Ui {
      */
     public void showWelcome() {
         showLine();
-        System.out.println("What's up twin, I'm \n" + NAME);
-        System.out.println("What can I do for you twin?\n");
+        System.out.println("What's up twin, I'm");
+        System.out.println(NAME);
+        System.out.println("What can I do for you twin?");
         showLine();
     }
 
@@ -26,7 +27,7 @@ public class Ui {
      * Displays the goodbye message.
      */
     public void showGoodbye() {
-        System.out.println("Bye. Hope to see you again soon, twin!\n");
+        System.out.println("Bye. Hope to see you again soon, twin!");
     }
 
     /**

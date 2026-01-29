@@ -1,20 +1,42 @@
 /**
- * Parses user input into commands and arguments.
+ * Parses user input into commands.
  */
 public class Parser {
     
     /**
-     * Parses the user's full command string.
+     * Parses the user's full command string into a Command object.
      *
      * @param fullCommand the complete user input
-     * @return a ParsedCommand object containing the command and arguments
+     * @return a Command object representing the user's action
+     * @throws TwinBotException if parsing fails
      */
-    public static ParsedCommand parse(String fullCommand) {
+    public static Command parse(String fullCommand) throws TwinBotException {
         String[] parts = fullCommand.split(" ", 2);
         String command = parts[0].toLowerCase();
         String arguments = parts.length > 1 ? parts[1] : "";
         
-        return new ParsedCommand(command, arguments);
+        switch (command) {
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ListCommand();
+        case "mark":
+            return new MarkCommand(arguments);
+        case "unmark":
+            return new UnmarkCommand(arguments);
+        case "todo":
+            return new AddTodoCommand(arguments.trim());
+        case "deadline":
+            return new AddDeadlineCommand(arguments);
+        case "event":
+            return new AddEventCommand(arguments);
+        case "delete":
+            return new DeleteCommand(arguments);
+        case "help":
+            return new HelpCommand();
+        default:
+            return new InvalidCommand();
+        }
     }
     
     /**
@@ -27,14 +49,14 @@ public class Parser {
     public static String[] parseDeadline(String arguments) throws TwinBotException {
         String[] parts = arguments.split("/by", 2);
         if (parts.length < 2) {
-            throw new TwinBotException("Twin, use 'deadline task /by date'\n");
+            throw new TwinBotException("Twin, use 'deadline task /by date'");
         }
         
         String description = parts[0].trim();
         String deadline = parts[1].trim();
         
         if (description.isEmpty() || deadline.isEmpty()) {
-            throw new TwinBotException("Twin, use 'deadline task /by date'\n");
+            throw new TwinBotException("Twin, use 'deadline task /by date'");
         }
         
         return new String[]{description, deadline};
@@ -50,7 +72,7 @@ public class Parser {
     public static String[] parseEvent(String arguments) throws TwinBotException {
         String[] parts = arguments.split("/from|/to", 3);
         if (parts.length < 3) {
-            throw new TwinBotException("Twin, use 'event task /from start /to end.'\n");
+            throw new TwinBotException("Twin, use 'event task /from start /to end.'");
         }
         
         String description = parts[0].trim();
@@ -58,7 +80,7 @@ public class Parser {
         String end = parts[2].trim();
         
         if (description.isEmpty() || start.isEmpty() || end.isEmpty()) {
-            throw new TwinBotException("Twin, use 'event task /from start /to end.'\n");
+            throw new TwinBotException("Twin, use 'event task /from start /to end.'");
         }
         
         return new String[]{description, start, end};
@@ -75,32 +97,11 @@ public class Parser {
         try {
             int index = Integer.parseInt(indexString.trim()) - 1;
             if (index < 0) {
-                throw new TwinBotException("Twin, use a positive number.\n");
+                throw new TwinBotException("Twin, use a positive number.");
             }
             return index;
         } catch (NumberFormatException e) {
-            throw new TwinBotException("Please enter a valid number.\n");
+            throw new TwinBotException("Please enter a valid number.");
         }
-    }
-}
-
-/**
- * Represents a parsed command with its arguments.
- */
-class ParsedCommand {
-    private final String command;
-    private final String arguments;
-    
-    public ParsedCommand(String command, String arguments) {
-        this.command = command;
-        this.arguments = arguments;
-    }
-    
-    public String getCommand() {
-        return command;
-    }
-    
-    public String getArguments() {
-        return arguments;
     }
 }
