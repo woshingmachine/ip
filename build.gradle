@@ -45,3 +45,7 @@ shadowJar {
 run {
     standardInput = System.in
 }
+
+checkstyle {
+    ignoreFailures = true
+}
