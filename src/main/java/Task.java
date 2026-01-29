@@ -15,7 +15,7 @@ public class Task {
      */
     public Task(String description, TaskType type) {
         this.description = description;
-        this.type =type;
+        this.type = type;
         this.status = TaskStatus.TODO;
     }
 
