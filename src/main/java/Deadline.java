@@ -23,6 +23,7 @@ public class Deadline extends Task {
     /**
      * Parses a date/time string in multiple formats.
      * Supported formats:
+     * - yyyy-MM-dd'T'HH:mm (e.g., 2019-12-15T14:30) - ISO format from storage
      * - yyyy-MM-dd HH:mm (e.g., 2019-12-02 18:00)
      * - d/M/yyyy HHmm (e.g., 2/12/2019 1800)
      * - d/M/yyyy (e.g., 2/12/2019) - defaults to 00:00
@@ -33,6 +34,7 @@ public class Deadline extends Task {
     private LocalDateTime parseDateTime(String dateString) {
         String trimmed = dateString.trim();
         DateTimeFormatter[] formatters = {
+            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"),
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
             DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),
             DateTimeFormatter.ofPattern("d/M/yyyy")
@@ -46,10 +48,6 @@ public class Deadline extends Task {
             }
         }
 
-        System.out.println("Invalid date/time format! Supported formats:");
-        System.out.println("  - yyyy-MM-dd HH:mm (e.g., 2019-12-02 18:00)");
-        System.out.println("  - d/M/yyyy HHmm (e.g., 2/12/2019 1800)");
-        System.out.println("  - d/M/yyyy (e.g., 2/12/2019)");
         return null;
     }
 
