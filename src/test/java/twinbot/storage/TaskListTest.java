@@ -1,16 +1,17 @@
 package twinbot.storage;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import twinbot.exception.TwinBotException;
-import twinbot.task.ToDo;
-import twinbot.task.Deadline;
-import twinbot.task.Task;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import twinbot.exception.TwinBotException;
+import twinbot.task.Deadline;
+import twinbot.task.Task;
+import twinbot.task.ToDo;
 
 /**
  * JUnit test class for TaskList.
@@ -73,8 +74,7 @@ public class TaskListTest {
 
     @Test
     public void removeTask_invalidIndex_throwsException() {
-        assertThrows(IndexOutOfBoundsException.class, () ->
-                taskList.removeTask(0));
+        assertThrows(IndexOutOfBoundsException.class, () -> taskList.removeTask(0));
     }
 
     @Test
@@ -87,8 +87,7 @@ public class TaskListTest {
 
     @Test
     public void getTask_invalidIndex_throwsException() {
-        assertThrows(IndexOutOfBoundsException.class, () ->
-                taskList.getTask(0));
+        assertThrows(IndexOutOfBoundsException.class, () -> taskList.getTask(0));
     }
 
     @Test

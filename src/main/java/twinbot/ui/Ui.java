@@ -6,10 +6,10 @@ import java.util.Scanner;
  * Handles interactions with the user.
  */
 public class Ui {
-    private Scanner scanner;
     private static final String NAME = "TWINBOT";
     private static final String LINE = "------------------------------";
-                
+    private Scanner scanner;
+
     /**
      * Constructs a Ui instance.
      */
