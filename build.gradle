@@ -1,7 +1,13 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
@@ -28,14 +34,14 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.Duke")
+    mainClass = "twinbot.TwinBot"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "twinbot"
     archiveClassifier = null
 }
 
-run{
+run {
     standardInput = System.in
 }
