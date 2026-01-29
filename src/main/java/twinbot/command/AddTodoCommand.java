@@ -13,7 +13,7 @@ import twinbot.ui.Ui;
  */
 public class AddTodoCommand extends Command {
     private String description;
-    
+
     /**
      * Constructs an AddTodoCommand with the given description.
      *
@@ -26,7 +26,7 @@ public class AddTodoCommand extends Command {
         }
         this.description = description;
     }
-    
+
     /**
      * Executes the add todo command.
      *
@@ -35,6 +35,7 @@ public class AddTodoCommand extends Command {
      * @param storage the storage for saving tasks
      * @throws TwinBotException if command execution fails
      */
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
         ToDo toDo = new ToDo(description);
@@ -43,23 +44,24 @@ public class AddTodoCommand extends Command {
         ui.showMessage("Added: " + toDo.getDescription());
         ui.showMessage(listCount(taskList.getSize()));
     }
-    
+
     /**
      * Indicates whether this command exits the application.
      *
      * @return false as this command does not exit
      */
+
     @Override
     public boolean isExit() {
         return false;
     }
-    
+
     /**
      * Saves the task list to storage.
      *
      * @param taskList the task list to save
-     * @param storage the storage to save to
-     * @param ui the UI for displaying messages
+     * @param storage  the storage to save to
+     * @param ui       the UI for displaying messages
      * @throws TwinBotException if saving fails
      */
     private void saveList(TaskList taskList, Storage storage, Ui ui) throws TwinBotException {

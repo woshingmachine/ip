@@ -1,12 +1,13 @@
 package twinbot.task;
 
-import org.junit.jupiter.api.Test;
-import twinbot.exception.TwinBotException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import twinbot.exception.TwinBotException;
 
 /**
  * JUnit test class for Deadline.
@@ -22,8 +23,7 @@ public class DeadlineTest {
 
     @Test
     public void constructor_invalidDateFormat_throwsException() {
-        assertThrows(TwinBotException.class, () ->
-                new Deadline("return book", "invalid-date"));
+        assertThrows(TwinBotException.class, () -> new Deadline("return book", "invalid-date"));
     }
 
     @Test

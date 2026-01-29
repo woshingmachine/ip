@@ -1,9 +1,6 @@
 {
-    "python-envs.defaultEnvManager": "ms-python.python:conda",
-    "python-envs.defaultPackageManager": "ms-python.python:conda",
-    "python-envs.pythonProjects": [],
-    "java.project.sourcePaths": [
-        "src\\main\\java"
-    ],
-    "java.project.referencedLibraries": []
+    "java.checkstyle.configuration": "${workspaceFolder}/config/checkstyle/checkstyle.xml",
+    "java.checkstyle.properties": {
+        "config_loc": "${workspaceFolder}/config/checkstyle"
+    }
 }

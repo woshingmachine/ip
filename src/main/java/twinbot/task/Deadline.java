@@ -16,7 +16,7 @@ public class Deadline extends Task {
     /**
      * Constructs a Deadline task with the given description and deadline.
      *
-     * @param description the task description
+     * @param description    the task description
      * @param deadlineString the string deadline for this task
      * @throws TwinBotException if the deadline string cannot be parsed
      */
@@ -42,10 +42,10 @@ public class Deadline extends Task {
     private LocalDateTime parseDateTime(String dateString) {
         String trimmed = dateString.trim();
         DateTimeFormatter[] formatters = {
-            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
-            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),
-            DateTimeFormatter.ofPattern("d/M/yyyy")
+                DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
+                DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),
+                DateTimeFormatter.ofPattern("d/M/yyyy")
         };
 
         for (DateTimeFormatter formatter : formatters) {
@@ -65,7 +65,9 @@ public class Deadline extends Task {
      * @return the deadline as a String in yyyy-MM-dd HH:mm format
      */
     public String getDeadline() {
-        if (this.deadline == null) return "";
+        if (this.deadline == null) {
+            return "";
+        }
         return this.deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 

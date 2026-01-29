@@ -1,11 +1,12 @@
 package twinbot.task;
 
-import org.junit.jupiter.api.Test;
-import twinbot.exception.TwinBotException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import twinbot.exception.TwinBotException;
 
 /**
  * JUnit test class for ToDo.
