@@ -14,6 +14,7 @@ import twinbot.ui.Ui;
  */
 public class DeleteCommand extends Command {
     private int index;
+
     /**
      * Constructs a DeleteCommand with parsed task index.
      *
@@ -23,7 +24,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String arguments) throws TwinBotException {
         this.index = Parser.parseTaskIndex(arguments);
     }
-    
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
         if (index >= taskList.getSize()) {
@@ -34,12 +35,12 @@ public class DeleteCommand extends Command {
         ui.showMessage("Ok twin, I've removed this task: " + task);
         ui.showMessage(listCount(taskList.getSize()));
     }
-    
+
     @Override
     public boolean isExit() {
         return false;
     }
-    
+
     private void saveList(TaskList taskList, Storage storage, Ui ui) throws TwinBotException {
         try {
             storage.save(taskList.getTasks());

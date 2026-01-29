@@ -13,6 +13,7 @@ import twinbot.ui.Ui;
  */
 public class UnmarkCommand extends Command {
     private int index;
+
     /**
      * Constructs an UnmarkCommand with parsed task index.
      *
@@ -22,7 +23,7 @@ public class UnmarkCommand extends Command {
     public UnmarkCommand(String arguments) throws TwinBotException {
         this.index = Parser.parseTaskIndex(arguments);
     }
-    
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
         if (index >= taskList.getSize()) {
@@ -33,12 +34,12 @@ public class UnmarkCommand extends Command {
         ui.showMessage("Nice, twin! I've unmarked the item.");
         printList(taskList, ui);
     }
-    
+
     @Override
     public boolean isExit() {
         return false;
     }
-    
+
     private void saveList(TaskList taskList, Storage storage, Ui ui) throws TwinBotException {
         try {
             storage.save(taskList.getTasks());
@@ -46,7 +47,7 @@ public class UnmarkCommand extends Command {
             throw new TwinBotException("Error saving tasks: " + e.getMessage());
         }
     }
-    
+
     private void printList(TaskList taskList, Ui ui) {
         for (int i = 0; i < taskList.getSize(); i++) {
             ui.showMessage(i + 1 + ". " + taskList.getTask(i).toString());

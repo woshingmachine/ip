@@ -15,7 +15,7 @@ import twinbot.ui.Ui;
 public class AddDeadlineCommand extends Command {
     private String description;
     private String deadline;
-    
+
     /**
      * Constructs an AddDeadlineCommand with parsed arguments.
      *
@@ -27,7 +27,7 @@ public class AddDeadlineCommand extends Command {
         this.description = parts[0];
         this.deadline = parts[1];
     }
-    
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
         Deadline deadlineTask = new Deadline(description, deadline);
@@ -36,18 +36,18 @@ public class AddDeadlineCommand extends Command {
         ui.showMessage("Added: " + description + " by " + deadline);
         ui.showMessage(listCount(taskList.getSize()));
     }
-    
+
     @Override
     public boolean isExit() {
         return false;
     }
-    
+
     /**
      * Saves the task list to storage.
      *
      * @param taskList the task list to save
-     * @param storage the storage to save to
-     * @param ui the UI for displaying messages
+     * @param storage  the storage to save to
+     * @param ui       the UI for displaying messages
      * @throws TwinBotException if saving fails
      */
     private void saveList(TaskList taskList, Storage storage, Ui ui) throws TwinBotException {

@@ -16,6 +16,7 @@ public class AddEventCommand extends Command {
     private String description;
     private String start;
     private String end;
+
     /**
      * Constructs an AddEventCommand with parsed arguments.
      *
@@ -28,7 +29,7 @@ public class AddEventCommand extends Command {
         this.start = parts[1];
         this.end = parts[2];
     }
-    
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
         Event event = new Event(description, start, end);
@@ -37,12 +38,12 @@ public class AddEventCommand extends Command {
         ui.showMessage("Added: " + description + " from " + start + " to " + end);
         ui.showMessage(listCount(taskList.getSize()));
     }
-    
+
     @Override
     public boolean isExit() {
         return false;
     }
-    
+
     private void saveList(TaskList taskList, Storage storage, Ui ui) throws TwinBotException {
         try {
             storage.save(taskList.getTasks());
