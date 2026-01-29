@@ -12,55 +12,81 @@ You now have 1 tasks in your list, twin
 ------------------------------
 
 ------------------------------
-Added: Homework by Monday
+Added: Homework by 2/12/2019 1800
 
 You now have 2 tasks in your list, twin
 ------------------------------
 
 ------------------------------
+Added: Return book by 2019-12-15 14:30
+
+You now have 3 tasks in your list, twin
+------------------------------
+
+------------------------------
+Added: Project from 2/1/2020 0900 to 3/1/2020 1700
+
+You now have 4 tasks in your list, twin
+------------------------------
+
+------------------------------
 Here are your tasks, twin:
 
-1. [ ][ToDo] Buy Milk
-2. [ ][Deadline] Homework | By: Monday
+1. [ ][T] Buy Milk
+2. [ ][D] Homework | By: Dec 02 2019 18:00
+3. [ ][D] Return book | By: Dec 15 2019 14:30
+4. [ ][E] Project | from: Jan 02 2020 09:00 to: Jan 03 2020 17:00
 ------------------------------
 
 ------------------------------
 Nice, twin! I've marked the item.
 
-1. [X][ToDo] Buy Milk
-2. [ ][Deadline] Homework | By: Monday
+1. [X][T] Buy Milk
+2. [ ][D] Homework | By: Dec 02 2019 18:00
+3. [ ][D] Return book | By: Dec 15 2019 14:30
+4. [ ][E] Project | from: Jan 02 2020 09:00 to: Jan 03 2020 17:00
 ------------------------------
 
 ------------------------------
 Nice, twin! I've unmarked the item.
 
-1. [ ][ToDo] Buy Milk
-2. [ ][Deadline] Homework | By: Monday
+1. [ ][T] Buy Milk
+2. [ ][D] Homework | By: Dec 02 2019 18:00
+3. [ ][D] Return book | By: Dec 15 2019 14:30
+4. [ ][E] Project | from: Jan 02 2020 09:00 to: Jan 03 2020 17:00
 ------------------------------
 
 ------------------------------
-Added: Project from today to tomorrow
-
-You now have 3 tasks in your list, twin
-------------------------------
-
-Twin, use 'todo task'
-
-------------------------------
-Added: finish work
-
-You now have 4 tasks in your list, twin
-------------------------------
-
-Twin, use 'event task /from start /to end.'
-
-------------------------------
-Added: jump from 1 to 5
+Added: Meeting from 2019-12-02 10:00 to 2019-12-02 11:00
 
 You now have 5 tasks in your list, twin
 ------------------------------
 
-Twin, icl idk what that means. Type help for list of commands.
+------------------------------
+Here are your tasks, twin:
+
+1. [ ][T] Buy Milk
+2. [ ][D] Homework | By: Dec 02 2019 18:00
+3. [ ][D] Return book | By: Dec 15 2019 14:30
+4. [ ][E] Project | from: Jan 02 2020 09:00 to: Jan 03 2020 17:00
+5. [ ][E] Meeting | from: Dec 02 2019 10:00 to: Dec 02 2019 11:00
+------------------------------
+
+------------------------------
+Ok twin, I've removed this task: [ ][D] Homework | By: Dec 02 2019 18:00
+
+You now have 4 tasks in your list, twin
+------------------------------
+
+------------------------------
+Here are your tasks, twin:
+
+1. [ ][T] Buy Milk
+2. [ ][D] Return book | By: Dec 15 2019 14:30
+3. [ ][E] Project | from: Jan 02 2020 09:00 to: Jan 03 2020 17:00
+4. [ ][E] Meeting | from: Dec 02 2019 10:00 to: Dec 02 2019 11:00
+------------------------------
+
 - todo <task>
 - deadline <task> /by <date>
 - event <task> /from <start> to <end>
@@ -69,14 +95,6 @@ Twin, icl idk what that means. Type help for list of commands.
 - mark <number>
 - unmark <number>
 - delete <number>
-
-Twin, use 'delete number'.
-
-------------------------------
-Ok twin, I've removed this task: [ ][ToDo] Buy Milk
-
-You now have 4 tasks in your list, twin
-------------------------------
 
 ------------------------------
 See you soon twin.

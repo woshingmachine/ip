@@ -1,15 +1,13 @@
 todo Buy Milk
-deadline Homework /by Monday
+deadline Homework /by 2/12/2019 1800
+deadline Return book /by 2019-12-15 14:30
+event Project /from 2/1/2020 0900 /to 3/1/2020 1700
 list
 mark 1
 unmark 1
-event Project /from today /to tomorrow
-TODO
-todo finish work
-event      /from /to
-event jump /from 1 /to 5
-blah
+event Meeting /from 2019-12-02 10:00 /to 2019-12-02 11:00
+list
+delete 2
+list
 help
-delete nothing
-delete 1
-Bye
+bye
