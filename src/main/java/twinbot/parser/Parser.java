@@ -1,3 +1,8 @@
+package twinbot.parser;
+
+import twinbot.command.*;
+import twinbot.exception.TwinBotException;
+
 /**
  * Parses user input into commands.
  */
@@ -49,14 +54,16 @@ public class Parser {
     public static String[] parseDeadline(String arguments) throws TwinBotException {
         String[] parts = arguments.split("/by", 2);
         if (parts.length < 2) {
-            throw new TwinBotException("Twin, use 'deadline task /by date'");
+            throw new TwinBotException("Twin, use 'deadline task /by date'\n" +
+                    "Valid date formats: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
         }
         
         String description = parts[0].trim();
         String deadline = parts[1].trim();
         
         if (description.isEmpty() || deadline.isEmpty()) {
-            throw new TwinBotException("Twin, use 'deadline task /by date'");
+            throw new TwinBotException("Twin, use 'deadline task /by date'\n" +
+                    "Valid date formats: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
         }
         
         return new String[]{description, deadline};

@@ -1,6 +1,10 @@
+package twinbot.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import twinbot.exception.TwinBotException;
 
 /**
  * Represents an event task with a start and end time.
@@ -16,11 +20,18 @@ public class Event extends Task {
      * @param description the task description
      * @param startString the start time of the event as a string
      * @param endString the end time of the event as a string
+     * @throws TwinBotException if either date string cannot be parsed
      */
-    public Event(String description, String startString, String endString) {
+    public Event(String description, String startString, String endString) throws TwinBotException {
         super(description, TaskType.EVENT);
         this.start = parseDateTime(startString);
         this.end = parseDateTime(endString);
+        if (this.start == null) {
+            throw new TwinBotException("Invalid start date format. Use: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
+        }
+        if (this.end == null) {
+            throw new TwinBotException("Invalid end date format. Use: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
+        }
     }
 
     /**
@@ -89,9 +100,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        if (this.start == null || this.end == null) {
-            return this.getStatusIcon() + "[E] " + this.getDescription() + " | (invalid dates)";
-        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return this.getStatusIcon()
                 + "[E] "

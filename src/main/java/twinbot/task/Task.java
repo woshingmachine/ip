@@ -1,3 +1,5 @@
+package twinbot.task;
+
 /**
  * Represents a generic task with a description, status, and type.
  * This is the base class for ToDo, Deadline, and Event tasks.

@@ -1,8 +1,15 @@
+package twinbot.storage;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import twinbot.task.Task;
+import twinbot.task.ToDo;
+import twinbot.task.Deadline;
+import twinbot.task.Event;
 
 /**
  * Handles loading and saving of tasks to the hard disk.
@@ -45,21 +52,27 @@ public class Storage {
 
             Task task = null;
 
-            switch (typeCode) {
-            case "T": // ToDo
-                task = new ToDo(description);
-                break;
-            case "D": // Deadline
-                if (parts.length < 4) continue; // skip malformed line
-                String by = parts[3];
-                task = new Deadline(description, by);
-                break;
-            case "E": // Event
-                if (parts.length < 5) continue; // skip malformed line
-                String start = parts[3];
-                String end = parts[4];
-                task = new Event(description, start, end);
-                break;
+            try {
+                switch (typeCode) {
+                case "T": // ToDo
+                    task = new ToDo(description);
+                    break;
+                case "D": // Deadline
+                    if (parts.length < 4) continue; // skip malformed line
+                    String by = parts[3];
+                    task = new Deadline(description, by);
+                    break;
+                case "E": // Event
+                    if (parts.length < 5) continue; // skip malformed line
+                    String start = parts[3];
+                    String end = parts[4];
+                    task = new Event(description, start, end);
+                    break;
+                }
+            } catch (Exception e) {
+                // Skip tasks with invalid data
+                System.out.println("Skipping corrupted task: " + line);
+                continue;
             }
 
             if (task != null && isDone) {

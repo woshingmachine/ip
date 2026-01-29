@@ -1,11 +1,24 @@
+package twinbot.command;
+
 import java.io.IOException;
+
+import twinbot.exception.TwinBotException;
+import twinbot.parser.Parser;
+import twinbot.storage.Storage;
+import twinbot.storage.TaskList;
+import twinbot.ui.Ui;
 
 /**
  * Command to mark a task as not done.
  */
 public class UnmarkCommand extends Command {
     private int index;
-    
+    /**
+     * Constructs an UnmarkCommand with parsed task index.
+     *
+     * @param arguments the arguments containing the task index
+     * @throws TwinBotException if parsing fails
+     */
     public UnmarkCommand(String arguments) throws TwinBotException {
         this.index = Parser.parseTaskIndex(arguments);
     }
