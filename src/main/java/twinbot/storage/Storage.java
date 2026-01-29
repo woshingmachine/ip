@@ -6,10 +6,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import twinbot.task.Task;
-import twinbot.task.ToDo;
 import twinbot.task.Deadline;
 import twinbot.task.Event;
+import twinbot.task.Task;
+import twinbot.task.ToDo;
 
 /**
  * Handles loading and saving of tasks to the hard disk.
@@ -58,16 +58,22 @@ public class Storage {
                     task = new ToDo(description);
                     break;
                 case "D": // Deadline
-                    if (parts.length < 4) continue; // skip malformed line
+                    if (parts.length < 4) {
+                        continue; // skip malformed line
+                    }
                     String by = parts[3];
                     task = new Deadline(description, by);
                     break;
                 case "E": // Event
-                    if (parts.length < 5) continue; // skip malformed line
+                    if (parts.length < 5) {
+                        continue; // skip malformed line
+                    }
                     String start = parts[3];
                     String end = parts[4];
                     task = new Event(description, start, end);
                     break;
+                default:
+                    continue;
                 }
             } catch (Exception e) {
                 // Skip tasks with invalid data
@@ -86,7 +92,6 @@ public class Storage {
 
         return tasks;
     }
-
 
     /**
      * Saves the given list of tasks to the data file.
