@@ -1,4 +1,8 @@
+package twinbot.storage;
+
 import java.util.ArrayList;
+
+import twinbot.task.Task;
 
 /**
  * Manages the list of tasks.

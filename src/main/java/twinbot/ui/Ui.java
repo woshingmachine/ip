@@ -1,3 +1,5 @@
+package twinbot.ui;
+
 import java.util.Scanner;
 
 /**
@@ -8,6 +10,9 @@ public class Ui {
     private static final String NAME = "TWINBOT";
     private static final String LINE = "------------------------------";
                 
+    /**
+     * Constructs a Ui instance.
+     */
     public Ui() {
         this.scanner = new Scanner(System.in);
     }

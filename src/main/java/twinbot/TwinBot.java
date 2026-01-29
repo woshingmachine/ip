@@ -1,4 +1,13 @@
+package twinbot;
+
 import java.io.IOException;
+
+import twinbot.command.Command;
+import twinbot.exception.TwinBotException;
+import twinbot.parser.Parser;
+import twinbot.storage.Storage;
+import twinbot.storage.TaskList;
+import twinbot.ui.Ui;
 
 /**
  * TwinBot is a task management chatbot application.
@@ -8,7 +17,12 @@ public class TwinBot {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
-    
+
+    /**
+     * Constructor for TwinBot.
+     * 
+     * @param filePath the path to the data file for storing tasks
+     */
     public TwinBot(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -19,7 +33,10 @@ public class TwinBot {
             taskList = new TaskList();
         }
     }
-    
+
+    /**
+     * Runs the main loop of the TwinBot application.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -38,7 +55,12 @@ public class TwinBot {
         }
         ui.close();
     }
-    
+
+    /**
+     * Main method to start the TwinBot application.
+     *
+     * @param args command line arguments (not used)
+     */
     public static void main(String[] args) {
         new TwinBot("./data/twinbot.txt").run();
     }

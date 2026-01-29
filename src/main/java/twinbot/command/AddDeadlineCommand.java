@@ -1,4 +1,13 @@
+package twinbot.command;
+
 import java.io.IOException;
+
+import twinbot.exception.TwinBotException;
+import twinbot.parser.Parser;
+import twinbot.storage.Storage;
+import twinbot.storage.TaskList;
+import twinbot.task.Deadline;
+import twinbot.ui.Ui;
 
 /**
  * Command to add a deadline task.
@@ -7,6 +16,12 @@ public class AddDeadlineCommand extends Command {
     private String description;
     private String deadline;
     
+    /**
+     * Constructs an AddDeadlineCommand with parsed arguments.
+     *
+     * @param arguments the arguments to parse for deadline task
+     * @throws TwinBotException if parsing fails
+     */
     public AddDeadlineCommand(String arguments) throws TwinBotException {
         String[] parts = Parser.parseDeadline(arguments);
         this.description = parts[0];
@@ -27,6 +42,14 @@ public class AddDeadlineCommand extends Command {
         return false;
     }
     
+    /**
+     * Saves the task list to storage.
+     *
+     * @param taskList the task list to save
+     * @param storage the storage to save to
+     * @param ui the UI for displaying messages
+     * @throws TwinBotException if saving fails
+     */
     private void saveList(TaskList taskList, Storage storage, Ui ui) throws TwinBotException {
         try {
             storage.save(taskList.getTasks());

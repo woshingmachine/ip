@@ -1,3 +1,5 @@
+package twinbot.task;
+
 /**
  * Represents the status of a task.
  * A task can be either TODO or DONE.

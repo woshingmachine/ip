@@ -1,6 +1,10 @@
+package twinbot.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import twinbot.exception.TwinBotException;
 
 /**
  * Represents a task with a deadline.
@@ -14,10 +18,14 @@ public class Deadline extends Task {
      *
      * @param description the task description
      * @param deadlineString the string deadline for this task
+     * @throws TwinBotException if the deadline string cannot be parsed
      */
-    public Deadline(String description, String deadlineString) {
+    public Deadline(String description, String deadlineString) throws TwinBotException {
         super(description, TaskType.DEADLINE);
         this.deadline = parseDateTime(deadlineString);
+        if (this.deadline == null) {
+            throw new TwinBotException("Invalid date format. Use: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
+        }
     }
 
     /**
@@ -78,9 +86,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        if (this.deadline == null) {
-            return this.getStatusIcon() + "[D] " + this.getDescription() + " | By: (invalid date)";
-        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return this.getStatusIcon()
                 + "[D] "

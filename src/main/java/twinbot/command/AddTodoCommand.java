@@ -1,4 +1,12 @@
+package twinbot.command;
+
 import java.io.IOException;
+
+import twinbot.exception.TwinBotException;
+import twinbot.storage.Storage;
+import twinbot.storage.TaskList;
+import twinbot.task.ToDo;
+import twinbot.ui.Ui;
 
 /**
  * Command to add a todo task.
@@ -6,6 +14,12 @@ import java.io.IOException;
 public class AddTodoCommand extends Command {
     private String description;
     
+    /**
+     * Constructs an AddTodoCommand with the given description.
+     *
+     * @param description the description of the todo task
+     * @throws TwinBotException if description is empty
+     */
     public AddTodoCommand(String description) throws TwinBotException {
         if (description.isEmpty()) {
             throw new TwinBotException("Twin, use 'todo task'");
@@ -27,6 +41,14 @@ public class AddTodoCommand extends Command {
         return false;
     }
     
+    /**
+     * Saves the task list to storage.
+     *
+     * @param taskList the task list to save
+     * @param storage the storage to save to
+     * @param ui the UI for displaying messages
+     * @throws TwinBotException if saving fails
+     */
     private void saveList(TaskList taskList, Storage storage, Ui ui) throws TwinBotException {
         try {
             storage.save(taskList.getTasks());
