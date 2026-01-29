@@ -6,6 +6,7 @@ import twinbot.command.AddTodoCommand;
 import twinbot.command.Command;
 import twinbot.command.DeleteCommand;
 import twinbot.command.ExitCommand;
+import twinbot.command.FindCommand;
 import twinbot.command.HelpCommand;
 import twinbot.command.InvalidCommand;
 import twinbot.command.ListCommand;
@@ -47,6 +48,8 @@ public class Parser {
             return new AddEventCommand(arguments);
         case "delete":
             return new DeleteCommand(arguments);
+        case "find":
+            return new FindCommand(arguments);
         case "help":
             return new HelpCommand();
         default:
