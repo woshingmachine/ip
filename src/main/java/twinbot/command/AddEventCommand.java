@@ -29,6 +29,14 @@ public class AddEventCommand extends Command {
         this.end = parts[2];
     }
     
+    /**
+     * Executes the add event command.
+     *
+     * @param taskList the task list to add to
+     * @param ui the UI for user interaction
+     * @param storage the storage for saving tasks
+     * @throws TwinBotException if command execution fails
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
         Event event = new Event(description, start, end);
@@ -38,11 +46,24 @@ public class AddEventCommand extends Command {
         ui.showMessage(listCount(taskList.getSize()));
     }
     
+    /**
+     * Indicates whether this command exits the application.
+     *
+     * @return false as this command does not exit
+     */
     @Override
     public boolean isExit() {
         return false;
     }
     
+    /**
+     * Saves the task list to storage.
+     *
+     * @param taskList the task list to save
+     * @param storage the storage to save to
+     * @param ui the UI for displaying messages
+     * @throws TwinBotException if saving fails
+     */
     private void saveList(TaskList taskList, Storage storage, Ui ui) throws TwinBotException {
         try {
             storage.save(taskList.getTasks());

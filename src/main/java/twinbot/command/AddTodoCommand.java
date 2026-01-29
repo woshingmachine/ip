@@ -27,6 +27,14 @@ public class AddTodoCommand extends Command {
         this.description = description;
     }
     
+    /**
+     * Executes the add todo command.
+     *
+     * @param taskList the task list to add to
+     * @param ui the UI for user interaction
+     * @param storage the storage for saving tasks
+     * @throws TwinBotException if command execution fails
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
         ToDo toDo = new ToDo(description);
@@ -36,6 +44,11 @@ public class AddTodoCommand extends Command {
         ui.showMessage(listCount(taskList.getSize()));
     }
     
+    /**
+     * Indicates whether this command exits the application.
+     *
+     * @return false as this command does not exit
+     */
     @Override
     public boolean isExit() {
         return false;

@@ -28,6 +28,14 @@ public class AddDeadlineCommand extends Command {
         this.deadline = parts[1];
     }
     
+    /**
+     * Executes the add deadline command.
+     *
+     * @param taskList the task list to add to
+     * @param ui the UI for user interaction
+     * @param storage the storage for saving tasks
+     * @throws TwinBotException if command execution fails
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
         Deadline deadlineTask = new Deadline(description, deadline);
@@ -37,6 +45,11 @@ public class AddDeadlineCommand extends Command {
         ui.showMessage(listCount(taskList.getSize()));
     }
     
+    /**
+     * Indicates whether this command exits the application.
+     *
+     * @return false as this command does not exit
+     */
     @Override
     public boolean isExit() {
         return false;

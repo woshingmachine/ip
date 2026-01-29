@@ -24,6 +24,14 @@ public class DeleteCommand extends Command {
         this.index = Parser.parseTaskIndex(arguments);
     }
     
+    /**
+     * Executes the delete command.
+     *
+     * @param taskList the task list to remove from
+     * @param ui the UI for user interaction
+     * @param storage the storage for saving tasks
+     * @throws TwinBotException if command execution fails
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
         if (index >= taskList.getSize()) {
@@ -40,6 +48,14 @@ public class DeleteCommand extends Command {
         return false;
     }
     
+    /**
+     * Saves the task list to storage.
+     *
+     * @param taskList the task list to save
+     * @param storage the storage to save to
+     * @param ui the UI for displaying messages
+     * @throws TwinBotException if saving fails
+     */
     private void saveList(TaskList taskList, Storage storage, Ui ui) throws TwinBotException {
         try {
             storage.save(taskList.getTasks());

@@ -23,6 +23,14 @@ public class MarkCommand extends Command {
         this.index = Parser.parseTaskIndex(arguments);
     }
     
+    /**
+     * Executes the mark command.
+     *
+     * @param taskList the task list to update
+     * @param ui the UI for user interaction
+     * @param storage the storage for saving tasks
+     * @throws TwinBotException if command execution fails
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
         if (index >= taskList.getSize()) {
@@ -39,6 +47,14 @@ public class MarkCommand extends Command {
         return false;
     }
     
+    /**
+     * Saves the task list to storage.
+     *
+     * @param taskList the task list to save
+     * @param storage the storage to save to
+     * @param ui the UI for displaying messages
+     * @throws TwinBotException if saving fails
+     */
     private void saveList(TaskList taskList, Storage storage, Ui ui) throws TwinBotException {
         try {
             storage.save(taskList.getTasks());
@@ -47,6 +63,12 @@ public class MarkCommand extends Command {
         }
     }
     
+    /**
+     * Prints all tasks in the task list.
+     *
+     * @param taskList the task list to print
+     * @param ui the UI to display tasks
+     */
     private void printList(TaskList taskList, Ui ui) {
         for (int i = 0; i < taskList.getSize(); i++) {
             ui.showMessage(i + 1 + ". " + taskList.getTask(i).toString());

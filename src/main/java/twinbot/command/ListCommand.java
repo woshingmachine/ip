@@ -10,12 +10,24 @@ import twinbot.ui.Ui;
  */
 public class ListCommand extends Command {
     
+    /**
+     * Executes the list command.
+     *
+     * @param taskList the task list to display
+     * @param ui the UI for user interaction
+     * @param storage the storage for saving tasks
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
         ui.showMessage("Here are your tasks, twin:");
         printList(taskList, ui);
     }
     
+    /**
+     * Indicates whether this command exits the application.
+     *
+     * @return false as this command does not exit
+     */
     @Override
     public boolean isExit() {
         return false;
