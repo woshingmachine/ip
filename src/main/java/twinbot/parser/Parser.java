@@ -32,28 +32,28 @@ public class Parser {
         String arguments = parts.length > 1 ? parts[1] : "";
 
         switch (command) {
-        case "bye":
-            return new ExitCommand();
-        case "list":
-            return new ListCommand();
-        case "mark":
-            return new MarkCommand(arguments);
-        case "unmark":
-            return new UnmarkCommand(arguments);
-        case "todo":
-            return new AddTodoCommand(arguments.trim());
-        case "deadline":
-            return new AddDeadlineCommand(arguments);
-        case "event":
-            return new AddEventCommand(arguments);
-        case "delete":
-            return new DeleteCommand(arguments);
-        case "find":
-            return new FindCommand(arguments);
-        case "help":
-            return new HelpCommand();
-        default:
-            return new InvalidCommand();
+            case "bye":
+                return new ExitCommand();
+            case "list":
+                return new ListCommand();
+            case "mark":
+                return new MarkCommand(arguments);
+            case "unmark":
+                return new UnmarkCommand(arguments);
+            case "todo":
+                return new AddTodoCommand(arguments.trim());
+            case "deadline":
+                return new AddDeadlineCommand(arguments);
+            case "event":
+                return new AddEventCommand(arguments);
+            case "delete":
+                return new DeleteCommand(arguments);
+            case "find":
+                return new FindCommand(arguments);
+            case "help":
+                return new HelpCommand();
+            default:
+                return new InvalidCommand();
         }
     }
 
@@ -68,7 +68,7 @@ public class Parser {
         String[] parts = arguments.split("/by", 2);
         if (parts.length < 2) {
             throw new TwinBotException("Twin, use 'deadline task /by date'\n"
-                    + "Valid date formats: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
+                    + "Valid date formats: yyyy-MM-dd HH:mm or d/M/yyyy HHmm");
         }
 
         String description = parts[0].trim();
@@ -76,7 +76,7 @@ public class Parser {
 
         if (description.isEmpty() || deadline.isEmpty()) {
             throw new TwinBotException("Twin, use 'deadline task /by date'\n"
-                    + "Valid date formats: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
+                    + "Valid date formats: yyyy-MM-dd HH:mm or d/M/yyyy HHmm");
         }
 
         return new String[] { description, deadline };
@@ -92,7 +92,8 @@ public class Parser {
     public static String[] parseEvent(String arguments) throws TwinBotException {
         String[] parts = arguments.split("/from|/to", 3);
         if (parts.length < 3) {
-            throw new TwinBotException("Twin, use 'event task /from start /to end.'");
+            throw new TwinBotException("Twin, use 'event task /from start /to end.'\n"
+                    + "Valid date formats: yyyy-MM-dd HH:mm or d/M/yyyy HHmm");
         }
 
         String description = parts[0].trim();
@@ -100,7 +101,8 @@ public class Parser {
         String end = parts[2].trim();
 
         if (description.isEmpty() || start.isEmpty() || end.isEmpty()) {
-            throw new TwinBotException("Twin, use 'event task /from start /to end.'");
+            throw new TwinBotException("Twin, use 'event task /from start /to end.'\n"
+                    + "Valid date formats: yyyy-MM-dd HH:mm or d/M/yyyy HHmm");
         }
 
         return new String[] { description, start, end };

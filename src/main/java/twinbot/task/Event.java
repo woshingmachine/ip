@@ -15,11 +15,12 @@ public class Event extends Task {
     private LocalDateTime end;
 
     /**
-     * Constructs an Event task with the given description, start time, and end time.
+     * Constructs an Event task with the given description, start time, and end
+     * time.
      *
      * @param description the task description
      * @param startString the start time of the event as a string
-     * @param endString the end time of the event as a string
+     * @param endString   the end time of the event as a string
      * @throws TwinBotException if either date string cannot be parsed
      */
     public Event(String description, String startString, String endString) throws TwinBotException {
@@ -27,20 +28,19 @@ public class Event extends Task {
         this.start = parseDateTime(startString);
         this.end = parseDateTime(endString);
         if (this.start == null) {
-            throw new TwinBotException("Invalid start date format. Use: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
+            throw new TwinBotException("Invalid start date format. Use: yyyy-MM-dd HH:mm or d/M/yyyy HHmm");
         }
         if (this.end == null) {
-            throw new TwinBotException("Invalid end date format. Use: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
+            throw new TwinBotException("Invalid end date format. Use: yyyy-MM-dd HH:mm or d/M/yyyy HHmm");
         }
     }
 
     /**
      * Parses a date/time string in multiple formats.
      * Supported formats:
-     * - yyyy-MM-dd'T'HH:mm (e.g., 2019-12-02T18:00)
+     * - yyyy-MM-dd'T'HH:mm (e.g., 2019-12-02T18:00) - ISO format from storage
      * - yyyy-MM-dd HH:mm (e.g., 2019-12-02 18:00)
      * - d/M/yyyy HHmm (e.g., 2/12/2019 1800)
-     * - d/M/yyyy (e.g., 2/12/2019) - defaults to 00:00
      *
      * @param dateString the date string to parse
      * @return parsed LocalDateTime, or null if parsing fails
@@ -48,10 +48,9 @@ public class Event extends Task {
     private LocalDateTime parseDateTime(String dateString) {
         String trimmed = dateString.trim();
         DateTimeFormatter[] formatters = {
-            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
-            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),
-            DateTimeFormatter.ofPattern("d/M/yyyy")
+                DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
+                DateTimeFormatter.ofPattern("d/M/yyyy HHmm")
         };
 
         for (DateTimeFormatter formatter : formatters) {
@@ -96,7 +95,8 @@ public class Event extends Task {
     /**
      * Returns a string representation of the event task for display.
      *
-     * @return formatted String containing status, type, description, start date/time, and end date/time
+     * @return formatted String containing status, type, description, start
+     *         date/time, and end date/time
      */
     @Override
     public String toString() {

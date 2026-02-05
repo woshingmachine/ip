@@ -24,7 +24,7 @@ public class Deadline extends Task {
         super(description, TaskType.DEADLINE);
         this.deadline = parseDateTime(deadlineString);
         if (this.deadline == null) {
-            throw new TwinBotException("Invalid date format. Use: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
+            throw new TwinBotException("Invalid date format. Use: yyyy-MM-dd HH:mm or d/M/yyyy HHmm");
         }
     }
 
@@ -34,7 +34,6 @@ public class Deadline extends Task {
      * - yyyy-MM-dd'T'HH:mm (e.g., 2019-12-15T14:30) - ISO format from storage
      * - yyyy-MM-dd HH:mm (e.g., 2019-12-02 18:00)
      * - d/M/yyyy HHmm (e.g., 2/12/2019 1800)
-     * - d/M/yyyy (e.g., 2/12/2019) - defaults to 00:00
      *
      * @param dateString the date string to parse
      * @return parsed LocalDateTime, or null if parsing fails
@@ -44,8 +43,7 @@ public class Deadline extends Task {
         DateTimeFormatter[] formatters = {
                 DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"),
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
-                DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),
-                DateTimeFormatter.ofPattern("d/M/yyyy")
+                DateTimeFormatter.ofPattern("d/M/yyyy HHmm")
         };
 
         for (DateTimeFormatter formatter : formatters) {
