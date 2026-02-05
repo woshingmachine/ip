@@ -29,8 +29,8 @@ public class DeleteCommand extends Command {
      * Executes the delete command.
      *
      * @param taskList the task list to remove from
-     * @param ui the UI for user interaction
-     * @param storage the storage for saving tasks
+     * @param ui       the UI for user interaction
+     * @param storage  the storage for saving tasks
      * @throws TwinBotException if command execution fails
      */
 
@@ -41,8 +41,8 @@ public class DeleteCommand extends Command {
         }
         Task task = taskList.removeTask(index);
         saveList(taskList, storage, ui);
-        ui.showMessage("Ok twin, I've removed this task: " + task);
-        ui.showMessage(listCount(taskList.getSize()));
+        String message = "Ok twin, I've removed this task: " + task + "\n" + listCount(taskList.getSize());
+        ui.showMessage(message);
     }
 
     @Override
@@ -54,8 +54,8 @@ public class DeleteCommand extends Command {
      * Saves the task list to storage.
      *
      * @param taskList the task list to save
-     * @param storage the storage to save to
-     * @param ui the UI for displaying messages
+     * @param storage  the storage to save to
+     * @param ui       the UI for displaying messages
      * @throws TwinBotException if saving fails
      */
 

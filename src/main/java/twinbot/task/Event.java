@@ -17,9 +17,12 @@ public class Event extends Task {
     /**
      * Constructs an Event task with the given description, start time, and end
      * time.
+     * Constructs an Event task with the given description, start time, and end
+     * time.
      *
      * @param description the task description
      * @param startString the start time of the event as a string
+     * @param endString   the end time of the event as a string
      * @param endString   the end time of the event as a string
      * @throws TwinBotException if either date string cannot be parsed
      */
