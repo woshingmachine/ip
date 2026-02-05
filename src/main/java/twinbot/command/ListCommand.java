@@ -14,14 +14,20 @@ public class ListCommand extends Command {
      * Executes the list command.
      *
      * @param taskList the task list to display
-     * @param ui the UI for user interaction
-     * @param storage the storage for saving tasks
+     * @param ui       the UI for user interaction
+     * @param storage  the storage for saving tasks
      */
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
-        ui.showMessage("Here are your tasks, twin:");
-        printList(taskList, ui);
+        StringBuilder sb = new StringBuilder("Here are your tasks, twin:\n");
+        for (int i = 0; i < taskList.getSize(); i++) {
+            sb.append(i + 1).append(". ").append(taskList.getTask(i).toString()).append("\n");
+        }
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        ui.showMessage(sb.toString());
     }
 
     /**
@@ -33,17 +39,5 @@ public class ListCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
-    }
-
-    /**
-     * Prints all tasks in the task list.
-     *
-     * @param taskList the task list to print
-     * @param ui       the UI to display tasks
-     */
-    private void printList(TaskList taskList, Ui ui) {
-        for (int i = 0; i < taskList.getSize(); i++) {
-            ui.showMessage(i + 1 + ". " + taskList.getTask(i).toString());
-        }
     }
 }

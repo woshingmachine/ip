@@ -27,18 +27,19 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
-        ui.showMessage("Here are the matching tasks in your list:");
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
         int count = 0;
         for (int i = 0; i < taskList.getSize(); i++) {
             Task task = taskList.getTask(i);
             if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                 count++;
-                ui.showMessage((i + 1) + "." + task.toString());
+                sb.append("\n").append(i + 1).append(". ").append(task.toString());
             }
         }
         if (count == 0) {
-            ui.showMessage("No matching tasks found.");
+            sb = new StringBuilder("No matching tasks found.");
         }
+        ui.showMessage(sb.toString());
     }
 
     @Override

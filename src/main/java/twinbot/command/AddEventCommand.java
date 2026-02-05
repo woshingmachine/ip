@@ -34,8 +34,8 @@ public class AddEventCommand extends Command {
      * Executes the add event command.
      *
      * @param taskList the task list to add to
-     * @param ui the UI for user interaction
-     * @param storage the storage for saving tasks
+     * @param ui       the UI for user interaction
+     * @param storage  the storage for saving tasks
      * @throws TwinBotException if command execution fails
      */
 
@@ -44,8 +44,9 @@ public class AddEventCommand extends Command {
         Event event = new Event(description, start, end);
         taskList.addTask(event);
         saveList(taskList, storage, ui);
-        ui.showMessage("Added: " + description + " from " + start + " to " + end);
-        ui.showMessage(listCount(taskList.getSize()));
+        String message = "Added: " + description + " from " + start + " to " + end + "\n"
+                + listCount(taskList.getSize());
+        ui.showMessage(message);
     }
 
     /**
@@ -63,8 +64,8 @@ public class AddEventCommand extends Command {
      * Saves the task list to storage.
      *
      * @param taskList the task list to save
-     * @param storage the storage to save to
-     * @param ui the UI for displaying messages
+     * @param storage  the storage to save to
+     * @param ui       the UI for displaying messages
      * @throws TwinBotException if saving fails
      */
 

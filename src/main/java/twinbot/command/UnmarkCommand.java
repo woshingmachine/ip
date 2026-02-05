@@ -28,8 +28,8 @@ public class UnmarkCommand extends Command {
      * Executes the unmark command.
      *
      * @param taskList the task list to update
-     * @param ui the UI for user interaction
-     * @param storage the storage for saving tasks
+     * @param ui       the UI for user interaction
+     * @param storage  the storage for saving tasks
      * @throws TwinBotException if command execution fails
      */
 
@@ -40,8 +40,14 @@ public class UnmarkCommand extends Command {
         }
         taskList.getTask(index).unmark();
         saveList(taskList, storage, ui);
-        ui.showMessage("Nice, twin! I've unmarked the item.");
-        printList(taskList, ui);
+        StringBuilder sb = new StringBuilder("Nice, twin! I've unmarked the item.\n");
+        for (int i = 0; i < taskList.getSize(); i++) {
+            sb.append(i + 1).append(". ").append(taskList.getTask(i).toString()).append("\n");
+        }
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        ui.showMessage(sb.toString());
     }
 
     @Override
@@ -53,8 +59,8 @@ public class UnmarkCommand extends Command {
      * Saves the task list to storage.
      *
      * @param taskList the task list to save
-     * @param storage the storage to save to
-     * @param ui the UI for displaying messages
+     * @param storage  the storage to save to
+     * @param ui       the UI for displaying messages
      * @throws TwinBotException if saving fails
      */
 
@@ -63,19 +69,6 @@ public class UnmarkCommand extends Command {
             storage.save(taskList.getTasks());
         } catch (IOException e) {
             throw new TwinBotException("Error saving tasks: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Prints all tasks in the task list.
-     *
-     * @param taskList the task list to print
-     * @param ui the UI to display tasks
-     */
-
-    private void printList(TaskList taskList, Ui ui) {
-        for (int i = 0; i < taskList.getSize(); i++) {
-            ui.showMessage(i + 1 + ". " + taskList.getTask(i).toString());
         }
     }
 }

@@ -31,8 +31,8 @@ public class AddTodoCommand extends Command {
      * Executes the add todo command.
      *
      * @param taskList the task list to add to
-     * @param ui the UI for user interaction
-     * @param storage the storage for saving tasks
+     * @param ui       the UI for user interaction
+     * @param storage  the storage for saving tasks
      * @throws TwinBotException if command execution fails
      */
 
@@ -41,8 +41,8 @@ public class AddTodoCommand extends Command {
         ToDo toDo = new ToDo(description);
         taskList.addTask(toDo);
         saveList(taskList, storage, ui);
-        ui.showMessage("Added: " + toDo.getDescription());
-        ui.showMessage(listCount(taskList.getSize()));
+        String message = "Added: " + toDo.getDescription() + "\n" + listCount(taskList.getSize());
+        ui.showMessage(message);
     }
 
     /**

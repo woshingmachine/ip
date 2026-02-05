@@ -24,7 +24,8 @@ public class Deadline extends Task {
         super(description, TaskType.DEADLINE);
         this.deadline = parseDateTime(deadlineString);
         if (this.deadline == null) {
-            throw new TwinBotException("Invalid date format. Use: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
+            throw new TwinBotException("Invalid date format.\n"
+                    + "Use: yyyy-MM-dd HH:mm, d/M/yyyy HHmm, or d/M/yyyy");
         }
     }
 

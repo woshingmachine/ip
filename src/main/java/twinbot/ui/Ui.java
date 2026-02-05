@@ -9,12 +9,14 @@ public class Ui {
     private static final String NAME = "TWINBOT";
     private static final String LINE = "------------------------------";
     private Scanner scanner;
+    private String lastMessage;
 
     /**
      * Constructs a Ui instance.
      */
     public Ui() {
         this.scanner = new Scanner(System.in);
+        this.lastMessage = "";
     }
 
     /**
@@ -49,6 +51,7 @@ public class Ui {
      */
     public void showError(String message) {
         System.out.println(message);
+        this.lastMessage = message;
     }
 
     /**
@@ -59,12 +62,22 @@ public class Ui {
     }
 
     /**
-     * Displays a message.
+     * Displays a message and stores it as the last message.
      *
      * @param message the message to display
      */
     public void showMessage(String message) {
         System.out.println(message);
+        this.lastMessage = message;
+    }
+
+    /**
+     * Returns the last message displayed.
+     *
+     * @return the last message
+     */
+    public String getLastMessage() {
+        return lastMessage;
     }
 
     /**

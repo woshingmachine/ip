@@ -32,8 +32,8 @@ public class AddDeadlineCommand extends Command {
      * Executes the add deadline command.
      *
      * @param taskList the task list to add to
-     * @param ui the UI for user interaction
-     * @param storage the storage for saving tasks
+     * @param ui       the UI for user interaction
+     * @param storage  the storage for saving tasks
      * @throws TwinBotException if command execution fails
      */
 
@@ -42,8 +42,8 @@ public class AddDeadlineCommand extends Command {
         Deadline deadlineTask = new Deadline(description, deadline);
         taskList.addTask(deadlineTask);
         saveList(taskList, storage, ui);
-        ui.showMessage("Added: " + description + " by " + deadline);
-        ui.showMessage(listCount(taskList.getSize()));
+        String message = "Added: " + description + " by " + deadline + "\n" + listCount(taskList.getSize());
+        ui.showMessage(message);
     }
 
     /**
