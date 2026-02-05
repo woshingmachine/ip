@@ -45,13 +45,14 @@ public class Ui {
     }
 
     /**
-     * Displays an error message.
+     * Displays error messages.
      *
-     * @param message the error message to display
+     * @param messages the error messages to display
      */
-    public void showError(String message) {
-        System.out.println(message);
-        this.lastMessage = message;
+    public void showError(String... messages) {
+        for (String message : messages) {
+            System.out.println(message);
+        }
     }
 
     /**
