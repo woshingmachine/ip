@@ -34,7 +34,9 @@ public class Ui {
      * Displays the goodbye message.
      */
     public void showGoodbye() {
-        System.out.println("Bye. Hope to see you again soon, twin!");
+        String message = "Bye. Hope to see you again soon, twin!";
+        System.out.println(message);
+        this.lastMessage = message;
     }
 
     /**
@@ -50,9 +52,15 @@ public class Ui {
      * @param messages the error messages to display
      */
     public void showError(String... messages) {
-        for (String message : messages) {
-            System.out.println(message);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < messages.length; i++) {
+            System.out.println(messages[i]);
+            sb.append(messages[i]);
+            if (i < messages.length - 1) {
+                sb.append("\n");
+            }
         }
+        this.lastMessage = sb.toString();
     }
 
     /**
