@@ -1,7 +1,5 @@
 package twinbot.command;
 
-import java.io.IOException;
-
 import twinbot.exception.TwinBotException;
 import twinbot.parser.Parser;
 import twinbot.storage.Storage;
@@ -39,36 +37,13 @@ public class UnmarkCommand extends Command {
             throw new TwinBotException("Invalid Number.");
         }
         taskList.getTask(index).unmark();
-        saveList(taskList, storage, ui);
-        StringBuilder sb = new StringBuilder("Nice, twin! I've unmarked the item.\n");
-        for (int i = 0; i < taskList.getSize(); i++) {
-            sb.append(i + 1).append(". ").append(taskList.getTask(i).toString()).append("\n");
-        }
-        if (sb.length() > 0) {
-            sb.deleteCharAt(sb.length() - 1);
-        }
-        ui.showMessage(sb.toString());
+        saveTaskList(taskList, storage);
+        String message = "Nice, twin! I've unmarked the item.\n" + formatTaskList(taskList);
+        ui.showMessage(message);
     }
 
     @Override
     public boolean isExit() {
         return false;
-    }
-
-    /**
-     * Saves the task list to storage.
-     *
-     * @param taskList the task list to save
-     * @param storage  the storage to save to
-     * @param ui       the UI for displaying messages
-     * @throws TwinBotException if saving fails
-     */
-
-    private void saveList(TaskList taskList, Storage storage, Ui ui) throws TwinBotException {
-        try {
-            storage.save(taskList.getTasks());
-        } catch (IOException e) {
-            throw new TwinBotException("Error saving tasks: " + e.getMessage());
-        }
     }
 }

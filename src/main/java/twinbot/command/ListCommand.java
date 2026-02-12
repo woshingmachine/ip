@@ -20,14 +20,8 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
-        StringBuilder sb = new StringBuilder("Here are your tasks, twin:\n");
-        for (int i = 0; i < taskList.getSize(); i++) {
-            sb.append(i + 1).append(". ").append(taskList.getTask(i).toString()).append("\n");
-        }
-        if (sb.length() > 0) {
-            sb.deleteCharAt(sb.length() - 1);
-        }
-        ui.showMessage(sb.toString());
+        String message = "Here are your tasks, twin:\n" + formatTaskList(taskList);
+        ui.showMessage(message);
     }
 
     /**
