@@ -78,7 +78,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toFileString() {
-        return super.toFileString() + " | " + deadline;
+        return toFileStringCore() + " | " + deadline + formatTagsForStorage();
     }
 
     /**
@@ -93,6 +93,7 @@ public class Deadline extends Task {
                 + "[D] "
                 + this.getDescription()
                 + " | By: "
-                + this.deadline.format(formatter);
+                + this.deadline.format(formatter)
+                + formatTagsForDisplay();
     }
 }

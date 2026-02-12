@@ -1,5 +1,9 @@
 package twinbot.task;
 
+import java.util.ArrayList;
+
+import twinbot.exception.TwinBotException;
+
 /**
  * Represents a generic task with a description, status, and type.
  * This is the base class for ToDo, Deadline, and Event tasks.
@@ -8,6 +12,7 @@ public class Task {
     private String description;
     private TaskStatus status;
     private TaskType type;
+    private ArrayList<String> tags;
 
     /**
      * Constructs a Task with the given description and type.
@@ -22,6 +27,7 @@ public class Task {
         this.description = description;
         this.type = type;
         this.status = TaskStatus.TODO;
+        this.tags = new ArrayList<>();
     }
 
     /**
@@ -31,6 +37,17 @@ public class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Updates the description of this task.
+     *
+     * @param description the new task description
+     */
+    public void setDescription(String description) {
+        assert description != null : "Task description cannot be null";
+        assert !description.trim().isEmpty() : "Task description cannot be empty";
+        this.description = description;
     }
 
     /**
@@ -66,13 +83,64 @@ public class Task {
     }
 
     /**
+     * Adds a tag to this task.
+     *
+     * @param tag the tag text (with or without leading #)
+     * @throws twinbot.exception.TwinBotException if tag is invalid
+     */
+    public void addTag(String tag) throws TwinBotException {
+        String normalized = normalizeTag(tag);
+        if (!tags.contains(normalized)) {
+            tags.add(normalized);
+        }
+    }
+
+    /**
+     * Removes a tag from this task.
+     *
+     * @param tag the tag text (with or without leading #)
+     * @throws twinbot.exception.TwinBotException if tag is invalid
+     */
+    public void removeTag(String tag) throws TwinBotException {
+        String normalized = normalizeTag(tag);
+        tags.remove(normalized);
+    }
+
+    /**
+     * Returns tags attached to this task.
+     *
+     * @return list of tags
+     */
+    public ArrayList<String> getTags() {
+        return new ArrayList<>(tags);
+    }
+
+    protected String toFileStringCore() {
+        return type.getCode() + " | " + (isDone() ? "1" : "0") + " | " + description;
+    }
+
+    protected String formatTagsForStorage() {
+        if (tags.isEmpty()) {
+            return "";
+        }
+        return " | tags:" + String.join(",", tags);
+    }
+
+    protected String formatTagsForDisplay() {
+        if (tags.isEmpty()) {
+            return "";
+        }
+        return " (tags: " + String.join(", ", tags) + ")";
+    }
+
+    /**
      * Converts the task into a string suitable for saving to a file.
      * Format: [Type code] | [0 or 1 done status] | [description]
      *
      * @return String representation of the task for storage
      */
     public String toFileString() {
-        return type.getCode() + " | " + (isDone() ? "1" : "0") + " | " + description;
+        return toFileStringCore() + formatTagsForStorage();
     }
 
     /**
@@ -82,6 +150,20 @@ public class Task {
      */
     @Override
     public String toString() {
-        return this.getStatusIcon() + " " + this.getDescription();
+        return this.getStatusIcon() + " " + this.getDescription() + formatTagsForDisplay();
+    }
+
+    private String normalizeTag(String tag) throws TwinBotException {
+        if (tag == null) {
+            throw new TwinBotException("Twin, tag cannot be null.");
+        }
+        String trimmed = tag.trim();
+        if (trimmed.startsWith("#")) {
+            trimmed = trimmed.substring(1).trim();
+        }
+        if (trimmed.isEmpty()) {
+            throw new TwinBotException("Twin, tag cannot be empty.");
+        }
+        return trimmed.toLowerCase();
     }
 }

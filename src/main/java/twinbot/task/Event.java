@@ -96,7 +96,7 @@ public class Event extends Task {
      */
     @Override
     public String toFileString() {
-        return super.toFileString() + " | " + start + " | " + end;
+        return toFileStringCore() + " | " + start + " | " + end + formatTagsForStorage();
     }
 
     /**
@@ -114,6 +114,7 @@ public class Event extends Task {
                 + " | from: "
                 + this.start.format(formatter)
                 + " to: "
-                + this.end.format(formatter);
+                + this.end.format(formatter)
+                + formatTagsForDisplay();
     }
 }
