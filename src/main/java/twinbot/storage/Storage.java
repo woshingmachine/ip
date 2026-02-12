@@ -23,6 +23,8 @@ public class Storage {
      * @param filePath the path to the data file
      */
     public Storage(String filePath) {
+        assert filePath != null : "File path cannot be null";
+        assert !filePath.trim().isEmpty() : "File path cannot be empty";
         this.filePath = Paths.get(filePath);
     }
 
@@ -54,26 +56,26 @@ public class Storage {
 
             try {
                 switch (typeCode) {
-                case "T": // ToDo
-                    task = new ToDo(description);
-                    break;
-                case "D": // Deadline
-                    if (parts.length < 4) {
-                        continue; // skip malformed line
-                    }
-                    String by = parts[3];
-                    task = new Deadline(description, by);
-                    break;
-                case "E": // Event
-                    if (parts.length < 5) {
-                        continue; // skip malformed line
-                    }
-                    String start = parts[3];
-                    String end = parts[4];
-                    task = new Event(description, start, end);
-                    break;
-                default:
-                    continue;
+                    case "T": // ToDo
+                        task = new ToDo(description);
+                        break;
+                    case "D": // Deadline
+                        if (parts.length < 4) {
+                            continue; // skip malformed line
+                        }
+                        String by = parts[3];
+                        task = new Deadline(description, by);
+                        break;
+                    case "E": // Event
+                        if (parts.length < 5) {
+                            continue; // skip malformed line
+                        }
+                        String start = parts[3];
+                        String end = parts[4];
+                        task = new Event(description, start, end);
+                        break;
+                    default:
+                        continue;
                 }
             } catch (Exception e) {
                 // Skip tasks with invalid data
@@ -100,6 +102,7 @@ public class Storage {
      * @throws IOException if an I/O error occurs
      */
     public void save(ArrayList<Task> tasks) throws IOException {
+        assert tasks != null : "Task list cannot be null";
         StringBuilder sb = new StringBuilder();
 
         for (Task task : tasks) {
