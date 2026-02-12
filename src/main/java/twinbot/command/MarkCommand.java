@@ -35,6 +35,9 @@ public class MarkCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
+        assert taskList != null : "Task list cannot be null";
+        assert ui != null : "UI cannot be null";
+        assert storage != null : "Storage cannot be null";
         if (index >= taskList.getSize()) {
             throw new TwinBotException("Invalid Number.");
         }
