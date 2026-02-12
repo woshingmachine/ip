@@ -1,7 +1,5 @@
 package twinbot.command;
 
-import java.io.IOException;
-
 import twinbot.exception.TwinBotException;
 import twinbot.parser.Parser;
 import twinbot.storage.Storage;
@@ -40,7 +38,7 @@ public class DeleteCommand extends Command {
             throw new TwinBotException("Invalid Number.");
         }
         Task task = taskList.removeTask(index);
-        saveList(taskList, storage, ui);
+        saveTaskList(taskList, storage);
         String message = "Ok twin, I've removed this task: " + task + "\n" + listCount(taskList.getSize());
         ui.showMessage(message);
     }
@@ -48,22 +46,5 @@ public class DeleteCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
-    }
-
-    /**
-     * Saves the task list to storage.
-     *
-     * @param taskList the task list to save
-     * @param storage  the storage to save to
-     * @param ui       the UI for displaying messages
-     * @throws TwinBotException if saving fails
-     */
-
-    private void saveList(TaskList taskList, Storage storage, Ui ui) throws TwinBotException {
-        try {
-            storage.save(taskList.getTasks());
-        } catch (IOException e) {
-            throw new TwinBotException("Error saving tasks: " + e.getMessage());
-        }
     }
 }
