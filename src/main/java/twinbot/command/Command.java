@@ -1,5 +1,7 @@
 package twinbot.command;
 
+import java.io.IOException;
+
 import twinbot.exception.TwinBotException;
 import twinbot.storage.Storage;
 import twinbot.storage.TaskList;
@@ -35,5 +37,37 @@ public abstract class Command {
      */
     protected String listCount(int count) {
         return "You now have " + count + " tasks in your list, twin";
+    }
+
+    /**
+     * Saves the task list to storage.
+     *
+     * @param taskList the task list to save
+     * @param storage  the storage to save to
+     * @throws TwinBotException if saving fails
+     */
+    protected void saveTaskList(TaskList taskList, Storage storage) throws TwinBotException {
+        try {
+            storage.save(taskList.getTasks());
+        } catch (IOException e) {
+            throw new TwinBotException("Error saving tasks: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Formats a task list as a numbered string.
+     *
+     * @param taskList the task list to format
+     * @return formatted string with numbered tasks
+     */
+    protected String formatTaskList(TaskList taskList) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < taskList.getSize(); i++) {
+            sb.append(i + 1).append(". ").append(taskList.getTask(i).toString());
+            if (i < taskList.getSize() - 1) {
+                sb.append("\n");
+            }
+        }
+        return sb.toString();
     }
 }

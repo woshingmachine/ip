@@ -1,7 +1,5 @@
 package twinbot.command;
 
-import java.io.IOException;
-
 import twinbot.exception.TwinBotException;
 import twinbot.parser.Parser;
 import twinbot.storage.Storage;
@@ -41,7 +39,7 @@ public class AddDeadlineCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws TwinBotException {
         Deadline deadlineTask = new Deadline(description, deadline);
         taskList.addTask(deadlineTask);
-        saveList(taskList, storage, ui);
+        saveTaskList(taskList, storage);
         String message = "Added: " + description + " by " + deadline + "\n" + listCount(taskList.getSize());
         ui.showMessage(message);
     }
@@ -55,21 +53,5 @@ public class AddDeadlineCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
-    }
-
-    /**
-     * Saves the task list to storage.
-     *
-     * @param taskList the task list to save
-     * @param storage  the storage to save to
-     * @param ui       the UI for displaying messages
-     * @throws TwinBotException if saving fails
-     */
-    private void saveList(TaskList taskList, Storage storage, Ui ui) throws TwinBotException {
-        try {
-            storage.save(taskList.getTasks());
-        } catch (IOException e) {
-            throw new TwinBotException("Error saving tasks: " + e.getMessage());
-        }
     }
 }
