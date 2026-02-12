@@ -68,14 +68,14 @@ public class Storage {
                     break;
                 case "D": // Deadline
                     if (parts.length < 4) {
-                    continue; // skip malformed line
+                        continue; // skip malformed line
                     }
                     String by = parts[3];
                     task = new Deadline(description, by);
                     break;
                 case "E": // Event
                     if (parts.length < 5) {
-                    continue; // skip malformed line
+                        continue; // skip malformed line
                     }
                     String start = parts[3];
                     String end = parts[4];
