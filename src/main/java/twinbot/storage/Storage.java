@@ -51,6 +51,13 @@ public class Storage {
             String typeCode = parts[0];
             boolean isDone = parts[1].equals("1");
             String description = parts[2];
+            String tagsPart = null;
+            if (parts.length > 3) {
+                String lastPart = parts[parts.length - 1];
+                if (lastPart.startsWith("tags:")) {
+                    tagsPart = lastPart;
+                }
+            }
 
             Task task = null;
 
@@ -61,14 +68,14 @@ public class Storage {
                     break;
                 case "D": // Deadline
                     if (parts.length < 4) {
-                        continue; // skip malformed line
+                    continue; // skip malformed line
                     }
                     String by = parts[3];
                     task = new Deadline(description, by);
                     break;
                 case "E": // Event
                     if (parts.length < 5) {
-                        continue; // skip malformed line
+                    continue; // skip malformed line
                     }
                     String start = parts[3];
                     String end = parts[4];
@@ -76,6 +83,16 @@ public class Storage {
                     break;
                 default:
                     continue;
+                }
+
+                if (task != null && tagsPart != null) {
+                    String rawTags = tagsPart.substring("tags:".length());
+                    if (!rawTags.isBlank()) {
+                        String[] tags = rawTags.split(",");
+                        for (String tag : tags) {
+                            task.addTag(tag);
+                        }
+                    }
                 }
             } catch (Exception e) {
                 // Skip tasks with invalid data

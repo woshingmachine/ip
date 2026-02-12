@@ -27,6 +27,8 @@ public class HelpCommand extends Command {
                         + "- mark <number>\n"
                         + "- unmark <number>\n"
                         + "- delete <number>\n"
+                        + "- tag <number> #tag\n"
+                        + "- untag <number> #tag\n"
                         + "- find <keyword>\n"
                         + "- bye");
     }

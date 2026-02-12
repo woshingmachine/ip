@@ -11,7 +11,9 @@ import twinbot.command.HelpCommand;
 import twinbot.command.InvalidCommand;
 import twinbot.command.ListCommand;
 import twinbot.command.MarkCommand;
+import twinbot.command.TagCommand;
 import twinbot.command.UnmarkCommand;
+import twinbot.command.UntagCommand;
 import twinbot.exception.TwinBotException;
 
 /**
@@ -49,6 +51,10 @@ public class Parser {
             return new AddEventCommand(arguments);
         case "delete":
             return new DeleteCommand(arguments);
+        case "tag":
+            return new TagCommand(arguments);
+        case "untag":
+            return new UntagCommand(arguments);
         case "find":
             return new FindCommand(arguments);
         case "help":
