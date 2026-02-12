@@ -13,9 +13,12 @@ public class Task {
      * Constructs a Task with the given description and type.
      *
      * @param description the task description
-     * @param type the type of task (ToDo, Deadline, or Event)
+     * @param type        the type of task (ToDo, Deadline, or Event)
      */
     public Task(String description, TaskType type) {
+        assert description != null : "Task description cannot be null";
+        assert !description.trim().isEmpty() : "Task description cannot be empty";
+        assert type != null : "Task type cannot be null";
         this.description = description;
         this.type = type;
         this.status = TaskStatus.TODO;

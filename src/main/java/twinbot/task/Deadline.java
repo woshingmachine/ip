@@ -22,6 +22,8 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String deadlineString) throws TwinBotException {
         super(description, TaskType.DEADLINE);
+        assert deadlineString != null : "Deadline string cannot be null";
+        assert !deadlineString.trim().isEmpty() : "Deadline string cannot be empty";
         this.deadline = parseDateTime(deadlineString);
         if (this.deadline == null) {
             throw new TwinBotException("Invalid date format. Use: yyyy-MM-dd HH:mm or d/M/yyyy HHmm");

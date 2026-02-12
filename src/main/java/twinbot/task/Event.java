@@ -28,6 +28,10 @@ public class Event extends Task {
      */
     public Event(String description, String startString, String endString) throws TwinBotException {
         super(description, TaskType.EVENT);
+        assert startString != null : "Start time cannot be null";
+        assert endString != null : "End time cannot be null";
+        assert !startString.trim().isEmpty() : "Start time cannot be empty";
+        assert !endString.trim().isEmpty() : "End time cannot be empty";
         this.start = parseDateTime(startString);
         this.end = parseDateTime(endString);
         if (this.start == null) {
