@@ -56,26 +56,26 @@ public class Storage {
 
             try {
                 switch (typeCode) {
-                    case "T": // ToDo
-                        task = new ToDo(description);
-                        break;
-                    case "D": // Deadline
-                        if (parts.length < 4) {
-                            continue; // skip malformed line
-                        }
-                        String by = parts[3];
-                        task = new Deadline(description, by);
-                        break;
-                    case "E": // Event
-                        if (parts.length < 5) {
-                            continue; // skip malformed line
-                        }
-                        String start = parts[3];
-                        String end = parts[4];
-                        task = new Event(description, start, end);
-                        break;
-                    default:
-                        continue;
+                case "T": // ToDo
+                    task = new ToDo(description);
+                    break;
+                case "D": // Deadline
+                    if (parts.length < 4) {
+                        continue; // skip malformed line
+                    }
+                    String by = parts[3];
+                    task = new Deadline(description, by);
+                    break;
+                case "E": // Event
+                    if (parts.length < 5) {
+                        continue; // skip malformed line
+                    }
+                    String start = parts[3];
+                    String end = parts[4];
+                    task = new Event(description, start, end);
+                    break;
+                default:
+                    continue;
                 }
             } catch (Exception e) {
                 // Skip tasks with invalid data
