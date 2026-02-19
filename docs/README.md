@@ -1,6 +1,6 @@
 # TwinBot User Guide
 
-**TwinBot** is a friendly task management chatbot with a conversational GUI. It helps you organize your tasks, set deadlines, and plan events—all through simple natural language commands.
+**TwinBot** is a friendly task management chatbot with a conversational GUI. It helps you organize your tasks, set deadlines, and plan events.
 
 ## Quick Start
 
@@ -42,13 +42,12 @@ A task with a deadline date and time.
 **Command:** `deadline <description> /by <date time>`
 
 **Supported Date Formats:**
-- `yyyy-MM-dd'T'HH:mm` (e.g., `2026-02-28T23:59`)
 - `yyyy-MM-dd HH:mm` (e.g., `2026-02-28 23:59`)
 - `d/M/yyyy HHmm` (e.g., `28/2/2026 2359`)
 
 **Example:**
 ```
-deadline Submit project /by 2026-02-28T23:59
+deadline Submit project /by 2026-02-28 23:59
 ```
 
 **Expected Output:**
