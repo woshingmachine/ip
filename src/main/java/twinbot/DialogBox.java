@@ -76,7 +76,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getTwinBotDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.dialog.setStyle("-fx-background-color: #e8f0fe; "
+        db.dialog.setStyle("-fx-background-color: #c8deff; "
                 + "-fx-text-fill: #202124; "
                 + "-fx-padding: 10px 15px; "
                 + "-fx-border-radius: 15; "
