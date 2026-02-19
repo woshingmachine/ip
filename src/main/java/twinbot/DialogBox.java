@@ -16,8 +16,8 @@ import javafx.scene.layout.HBox;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's
- * face
- * and a label containing text from the speaker.
+ * face and a label containing text from the speaker.
+ * Supports asymmetric styling for user messages, TwinBot messages, and error messages.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -50,12 +50,59 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a user dialog box with blue styling on the right.
+     * @param text The user's message
+     * @param img The user's image
+     * @return A user dialog box
+     */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setAlignment(Pos.TOP_RIGHT);
+        db.dialog.setStyle("-fx-background-color: #4a90e2; "
+                + "-fx-text-fill: white; "
+                + "-fx-padding: 10px 15px; "
+                + "-fx-border-radius: 15; "
+                + "-fx-font-size: 13; "
+                + "-fx-wrap-text: true; ");
+        return db;
     }
 
+    /**
+     * Creates a TwinBot dialog box with light blue styling on the left.
+     * @param text The bot's message
+     * @param img The bot's image
+     * @return A bot dialog box
+     */
     public static DialogBox getTwinBotDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.dialog.setStyle("-fx-background-color: #e8f0fe; "
+                + "-fx-text-fill: #202124; "
+                + "-fx-padding: 10px 15px; "
+                + "-fx-border-radius: 15; "
+                + "-fx-font-size: 13; "
+                + "-fx-wrap-text: true; ");
+        db.flip();
+        return db;
+    }
+
+    /**
+     * Creates an error dialog box with distinct red styling on the left.
+     * @param text The error message
+     * @param img The bot's image
+     * @return An error dialog box with red styling
+     */
+    public static DialogBox getErrorDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.dialog.setStyle("-fx-background-color: #ffebee; "
+                + "-fx-text-fill: #c62828; "
+                + "-fx-padding: 10px 15px; "
+                + "-fx-border-radius: 15; "
+                + "-fx-border-color: #f44336; "
+                + "-fx-border-width: 2; "
+                + "-fx-font-size: 13; "
+                + "-fx-font-weight: bold; "
+                + "-fx-wrap-text: true; ");
         db.flip();
         return db;
     }
